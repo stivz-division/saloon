@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Domain\Enum\AccountType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -64,6 +66,21 @@ class User extends Authenticatable
     public function isMaster(): bool
     {
         return $this->account_type === AccountType::Master;
+    }
+
+    public function infoMaster(): HasOne
+    {
+        return $this->hasOne(InfoMaster::class);
+    }
+
+    public function workingLocations(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            YandexLocation::class,
+            'master_working_locations',
+            'user_id',
+            'yandex_location_id'
+        );
     }
 
 }

@@ -17,10 +17,12 @@ class MultiSelect extends Component
 
     public $selected;
 
+    public $set = [];
+
     public function mount()
     {
         $this->values   = collect();
-        $this->selected = collect();
+        $this->selected = collect($this->set);
     }
 
     public function updatedValue()
