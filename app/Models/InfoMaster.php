@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class InfoMaster extends Model
+class InfoMaster extends Model implements HasMedia
 {
+
+    use InteractsWithMedia;
+
+    const MEDIA_COLLECTION_NAME = 'examples-works';
 
     protected $fillable
         = [
