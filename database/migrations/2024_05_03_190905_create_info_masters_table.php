@@ -20,6 +20,9 @@ return new class extends Migration {
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
+            $table->text('about')
+                ->nullable();
+
             $table->boolean('is_veterinarian')
                 ->comment('Ветеринар?')
                 ->default(false);

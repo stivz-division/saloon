@@ -36,6 +36,11 @@
             </label>
         </div>
 
+        <div class="mb-3">
+            <label for="about" class="form-label">О себе</label>
+            <textarea wire:model="about" class="form-control" name="about" id="about" rows="6"></textarea>
+        </div>
+
         <div>
             <button type="button" wire:click="saveInfo" class="btn btn-primary d-inline-block">
                 Сохранить изменения
