@@ -20,23 +20,27 @@ class MasterProfile extends Component
 
     public $about;
 
+    public $breeds;
+
     public function mount()
     {
-        $this->is_veterinarian = $this->user->infoMaster->is_veterinarian;
+        $this->is_veterinarian   = $this->user->infoMaster->is_veterinarian;
         $this->is_delivering_pet = $this->user->infoMaster->is_delivering_pet;
         $this->is_home_check_out = $this->user->infoMaster->is_home_check_out;
-        $this->is_at_home = $this->user->infoMaster->is_at_home;
-        $this->about = $this->user->infoMaster->about;
+        $this->is_at_home        = $this->user->infoMaster->is_at_home;
+        $this->about             = $this->user->infoMaster->about;
+        $this->breeds            = $this->user->infoMaster->breeds;
     }
 
     public function saveInfo()
     {
         $this->user->infoMaster()->update([
-            'is_veterinarian' => $this->is_veterinarian,
+            'is_veterinarian'   => $this->is_veterinarian,
             'is_delivering_pet' => $this->is_delivering_pet,
             'is_home_check_out' => $this->is_home_check_out,
-            'is_at_home' => $this->is_at_home,
-            'about' => $this->about,
+            'is_at_home'        => $this->is_at_home,
+            'about'             => $this->about,
+            'breeds'            => $this->breeds,
         ]);
 
         session()->flash('success', __('Сохранено!'));

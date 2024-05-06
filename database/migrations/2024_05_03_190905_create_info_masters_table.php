@@ -21,6 +21,11 @@ return new class extends Migration {
                 ->cascadeOnUpdate();
 
             $table->text('about')
+                ->comment('О себе')
+                ->nullable();
+
+            $table->text('breeds')
+                ->comment('Породы с которыми работает')
                 ->nullable();
 
             $table->boolean('is_veterinarian')

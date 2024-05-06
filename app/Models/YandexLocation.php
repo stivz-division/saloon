@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -20,7 +19,7 @@ class YandexLocation extends Model
     public function toSearchableArray()
     {
         return [
-            'id'       => (string) $this->id,
+            'id'       => $this->id,
             'location' => $this->location,
         ];
     }

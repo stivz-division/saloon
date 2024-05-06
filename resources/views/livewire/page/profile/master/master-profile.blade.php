@@ -38,7 +38,12 @@
 
         <div class="mb-3">
             <label for="about" class="form-label">О себе</label>
-            <textarea wire:model="about" class="form-control" name="about" id="about" rows="6"></textarea>
+            <textarea wire:model="about" class="form-control" name="about" id="about" rows="12"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="breeds" class="form-label">Породы с которыми работаете</label>
+            <textarea wire:model="breeds" class="form-control" name="breeds" id="breeds" rows="6"></textarea>
         </div>
 
         <div>
@@ -46,6 +51,10 @@
                 Сохранить изменения
             </button>
         </div>
+    </div>
+
+    <div class="p-3 rounded-2 bg-light mb-3">
+        <livewire:page.profile.master.services :user="$user"/>
     </div>
 
     <div class="p-3 rounded-2 bg-light mb-3">

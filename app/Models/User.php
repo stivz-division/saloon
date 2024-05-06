@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Domain\Enum\AccountType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -94,6 +95,11 @@ class User extends Authenticatable
             'user_id',
             'animal_id'
         );
+    }
+
+    public function masterServices(): HasMany
+    {
+        return $this->hasMany(ServiceMaster::class, 'user_id', 'id');
     }
 
 }
