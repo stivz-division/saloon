@@ -11,7 +11,7 @@ enum AccountType: string
     case Master = 'master';
     case Saloon = 'saloon';
 
-    public function name()
+    public function name(): string
     {
         return match ($this) {
             self::Client => 'Клиент',

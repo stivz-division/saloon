@@ -86,4 +86,14 @@ class User extends Authenticatable
         );
     }
 
+    public function animalsMaster(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Animal::class,
+            'animals_masters',
+            'user_id',
+            'animal_id'
+        );
+    }
+
 }

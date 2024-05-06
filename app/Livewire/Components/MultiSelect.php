@@ -9,6 +9,8 @@ class MultiSelect extends Component
 
     public $placeholder;
 
+    public $empty = false;
+
     public $value;
 
     public $values;
@@ -21,13 +23,18 @@ class MultiSelect extends Component
 
     public function mount()
     {
-        $this->values   = collect();
+        $this->values = collect();
         $this->selected = collect($this->set);
+
+        if ($this->empty === true) {
+            $this->updatedValue();
+            $this->filterValues();
+        }
     }
 
     public function updatedValue()
     {
-        if (empty($this->value)) {
+        if ($this->empty === false && empty($this->value)) {
             $this->values = collect();
 
             return;
@@ -42,7 +49,7 @@ class MultiSelect extends Component
     private function filterValues()
     {
         $this->values = $this->values->filter(function ($item) {
-            return ! in_array($item['value'],
+            return !in_array($item['value'],
                 $this->selected->pluck('value')->toArray());
         });
     }

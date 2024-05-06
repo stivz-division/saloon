@@ -47,6 +47,9 @@
         <livewire:page.profile.master.examples-works :user="$user"/>
     </div>
 
+    <div class="p-3 rounded-2 bg-light mb-3">
+        <livewire:page.profile.master.animals :user="$user"/>
+    </div>
 
     <div class="p-3 rounded-2 bg-light">
         <livewire:page.profile.master.location :user="$user"/>
