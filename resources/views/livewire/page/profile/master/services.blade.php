@@ -12,16 +12,17 @@
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">
                             {{ $service->title }}
-                            <a
-                                    wire:click.prevent="deleteService({{ $service->id }})"
-                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                            >Удалить</a>
+
                         </div>
                         {{ $service->description }}
                     </div>
-                    <span class="badge text-bg-primary rounded-pill">
+                    <span class="badge text-bg-primary rounded-pill me-1">
                         {{ number_format($service->price, 0, '.', ' ') }} руб.
                     </span>
+                    <span
+                            wire:click.prevent="deleteService({{ $service->id }})"
+                            class="badge text-bg-danger rounded-pill fs-6"
+                    >Удалить</span>
                 </li>
             @endforeach
         </ol>

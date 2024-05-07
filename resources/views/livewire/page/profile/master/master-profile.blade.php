@@ -1,6 +1,6 @@
 <div>
 
-    <div class="p-3 rounded-2 bg-light mb-3">
+    <div class="p-3 rounded-4 bg-light mb-3">
         <h2>Общие настройки</h2>
         <x-alert.block/>
         <div>
@@ -53,15 +53,15 @@
         </div>
     </div>
 
-    <div class="p-3 rounded-2 bg-light mb-3">
+    <div class="p-3 rounded-4 bg-light mb-3">
         <livewire:page.profile.master.services :user="$user"/>
     </div>
 
-    <div class="p-3 rounded-2 bg-light mb-3">
+    <div class="p-3 rounded-4 bg-light mb-3">
         <livewire:page.profile.master.examples-works :user="$user"/>
     </div>
 
-    <div class="p-3 rounded-2 bg-light mb-3">
+    <div class="p-3 rounded-4 bg-light mb-3">
         <livewire:page.profile.master.animals :user="$user"/>
     </div>
 

@@ -32,6 +32,10 @@ class User extends Authenticatable
             'account_type',
             'email',
             'password',
+            'phone',
+            'dop_phone',
+            'telegram',
+            'whatsapp',
         ];
 
     /**
