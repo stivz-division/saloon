@@ -106,4 +106,9 @@ class User extends Authenticatable
         return $this->hasMany(ServiceMaster::class, 'user_id', 'id');
     }
 
+    public function pets(): HasMany
+    {
+        return $this->hasMany(Pet::class, 'user_id', 'id');
+    }
+
 }

@@ -7,4 +7,8 @@
         <livewire:page.profile.master.master-profile :user="$user"/>
     @endif
 
+    @if($user->isClient())
+        <livewire:page.profile.client.pet :user="$user"/>
+    @endif
+
 </div>
