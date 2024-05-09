@@ -4,7 +4,7 @@
         <p>Укажите где вы оказываете свои услуги.</p>
         <div class="mb-2">
             <livewire:components.multi-select
-                    :service="$service"
+                    :service="$serviceLocation"
                     @change-selected="setLocations($event.detail.selected)"
                     :set="$locations"
                     placeholder="Укажите места работы"

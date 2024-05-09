@@ -19,12 +19,19 @@
                     </li>
 
                     <li class="nav-item">
+                        <x-header.item route="client.advertisement.list">Заявки</x-header.item>
+                    </li>
+
+                    <li class="nav-item">
                         <x-header.item route="profile">Профиль</x-header.item>
                     </li>
 
                 </ul>
                 <form method="post" action="{{ route('logout') }}">
                     @csrf
+                    @if(auth()->user()->isClient())
+                        @include('components.shared.client-advertisement-link')
+                    @endif
                     <button class="btn btn-outline-danger">Выйти</button>
                 </form>
             </div>

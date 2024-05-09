@@ -1,0 +1,1 @@
+<a href="{{ route('client.advertisement.create') }}" class="btn btn-outline-primary">Добавить объявление</a>

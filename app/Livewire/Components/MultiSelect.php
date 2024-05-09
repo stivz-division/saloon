@@ -11,6 +11,8 @@ class MultiSelect extends Component
 
     public $empty = false;
 
+    public $cleanAfterSelect = false;
+
     public $value;
 
     public $values;
@@ -19,11 +21,13 @@ class MultiSelect extends Component
 
     public $selected;
 
+    public $max; // Максимальное клоичество элементов доступных к выбору
+
     public $set = [];
 
     public function mount()
     {
-        $this->values = collect();
+        $this->values   = collect();
         $this->selected = collect($this->set);
 
         if ($this->empty === true) {
@@ -49,7 +53,7 @@ class MultiSelect extends Component
     private function filterValues()
     {
         $this->values = $this->values->filter(function ($item) {
-            return !in_array($item['value'],
+            return ! in_array($item['value'],
                 $this->selected->pluck('value')->toArray());
         });
     }
@@ -74,6 +78,11 @@ class MultiSelect extends Component
         );
 
         $this->filterValues();
+
+        if ($this->cleanAfterSelect === true) {
+            $this->value  = null;
+            $this->values = collect();
+        }
 
         $this->dispatch('change-selected', selected: $this->selected);
     }

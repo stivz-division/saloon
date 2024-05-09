@@ -2,6 +2,8 @@
     @if($empty === false)
         <input wire:model.live="value" type="search" class="form-control"
                id="searchInput"
+               @disabled($max !== null && $selected->count() >= $max)
+               @readonly($max !== null && $selected->count() >= $max)
                placeholder="{{ $placeholder }}">
     @endif
 
@@ -17,7 +19,7 @@
         @endforeach
     @endif
 
-    @if($values->count())
+    @if($values->count() && ($max === null || $selected->count() < $max))
         <div class="bg-light p-3 mt-1">
             <ul class="list-group">
                 @foreach($values as $item)

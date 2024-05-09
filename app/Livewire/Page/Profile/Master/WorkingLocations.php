@@ -3,17 +3,14 @@
 namespace App\Livewire\Page\Profile\Master;
 
 use App\Models\User;
-use App\Services\YandexLocationService;
 use Livewire\Component;
 
 class WorkingLocations extends Component
 {
 
+    use \App\Livewire\Components\Hepler\MultiSelect\Location;
+
     public User $user;
-
-    public $service = YandexLocationService::class;
-
-    public $locations = [];
 
     public function mount()
     {
@@ -25,11 +22,6 @@ class WorkingLocations extends Component
                 'name'  => $location->location,
             ];
         });
-    }
-
-    public function setLocations($selected)
-    {
-        $this->locations = $selected;
     }
 
     public function saveLocations()

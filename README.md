@@ -10,4 +10,5 @@ composer install
 ./vendor/bin/sail artisan storage:link
 ./vendor/bin/sail artisan parse:dogs
 ./vendor/bin/sail artisan parse:yandex-location
+./vendor/bin/sail artisan scout:sync-index-settings
 ```

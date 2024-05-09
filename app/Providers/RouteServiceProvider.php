@@ -49,6 +49,15 @@ class RouteServiceProvider extends ServiceProvider
                     base_path('routes/web.php'),
                     base_path('routes/auth.php'),
                 ]);
+
+            Route::middleware([
+                'web',
+            ])
+                ->prefix('client/advertisement')
+                ->name('client.advertisement.')
+                ->group(
+                    base_path('routes/client-advertisement.php')
+                );
         });
     }
 

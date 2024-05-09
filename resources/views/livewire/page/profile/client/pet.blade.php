@@ -11,68 +11,12 @@
 
                 @foreach($pets as $item)
 
-                    @php
-                        /** @var \Spatie\MediaLibrary\MediaCollections\Models\Media|null $image */
-                            $image = $item->image();
-                    @endphp
+                    <div class="col">
 
-                    <div class="col position-relative">
-
-                        <div class="p-2 bg-secondary rounded-3 h-100"
-                             style="width: 206px"
-                        >
-                            <div wire:click.prevent="deletePet({{ $item->id }})"
-                                 class="position-absolute"
-                                 style="top: 10px; right: 15px; cursor: pointer">
-                                <div
-                                        class="bg-white d-flex justify-content-center align-items-center"
-                                        style="width: 30px; height: 30px; border-radius: 50%"
-                                >
-                                    <i class="bi bi-trash-fill text-danger"></i>
-
-                                </div>
-                            </div>
-
-                            <span class="badge text-bg-primary">
-                                {{ $item->animal->title->name() }}
-                            </span>
-
-                            <div class="w-100 d-inline-block text-white fs-3">
-                                {{ $item->nickname }}
-                            </div>
-
-                            @if($image !== null)
-                                <a href="{{ $image->getFullUrl() }}" target="_blank">
-                                    <img
-                                            class="rounded-3"
-                                            style="width: 190px; height: 190px; object-fit: cover"
-                                            src="{{ $image->getFullUrl() }}"
-                                            alt="{{ $item->nickname }}"
-                                    >
-                                </a>
-                            @else
-                                <div
-                                        class="bg-light rounded-3 border d-flex justify-content-center align-items-center"
-                                        style="width: 190px; height: 190px"
-                                >
-                                    <i class="bi bi-card-image me-0 fs-1"></i>
-                                </div>
-                            @endif
-
-                            @if($item->breed)
-                                <div class="text-white small">
-                                    {{ $item->breed->name }}
-                                </div>
-                            @endif
-
-                            @if($item->petWeight)
-                                <div class="text-white small">
-                                    {{ $item->petWeight->title->name() }}
-                                </div>
-                            @endif
-
-
-                        </div>
+                        @include('livewire.page.profile.client.shared.pet-card', [
+                            'pet' => $item,
+                            'delete' => true
+                        ])
 
                     </div>
                 @endforeach

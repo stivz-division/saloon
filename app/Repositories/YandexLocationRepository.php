@@ -18,4 +18,16 @@ final class YandexLocationRepository
         return $collection->take($limit);
     }
 
+    /**
+     * @param  array  $ids
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getByIds(array $ids): Collection
+    {
+        return YandexLocation::query()
+            ->whereIn('id', $ids)
+            ->get();
+    }
+
 }

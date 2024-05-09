@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ClientAdvertisement;
+
 return [
 
     /*
@@ -137,9 +139,21 @@ return [
             // 'users' => [
             //     'filterableAttributes'=> ['id', 'name', 'email'],
             // ],
-            \App\Models\YandexLocation::class => [
+            \App\Models\YandexLocation::class      => [
                 'filterableAttributes' => ['id', 'location'],
                 'sortableAttributes'   => ['created_at', 'location'],
+            ],
+            \App\Models\ServiceMaster::class       => [
+                'filterableAttributes' => [
+                    'id', 'price',
+                ],
+                'sortableAttributes'   => [
+                    'created_at', 'id', 'title', 'description', 'price',
+                ],
+            ],
+            \App\Models\ClientAdvertisement::class => [
+                'filterableAttributes' => \App\Models\ClientAdvertisement::FILTERED_ATTRIBUTES,
+                'sortableAttributes'   => ClientAdvertisement::SORTABLE_ATTRIBUTES,
             ],
         ],
     ],
