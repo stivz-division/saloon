@@ -19,6 +19,8 @@ class ClientAdvertisementListPage extends Component
 
     public function selectLocations($locations)
     {
+        $this->setPage(1);
+        
         $this->locations = $locations;
     }
 
