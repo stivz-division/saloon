@@ -95,4 +95,9 @@ class ClientAdvertisement extends Model
         return $this->belongsTo(YandexLocation::class);
     }
 
+    public function isAuthor(int $userId): bool
+    {
+        return $this->user_id === $userId;
+    }
+
 }

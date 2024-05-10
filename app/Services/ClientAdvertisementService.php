@@ -15,6 +15,18 @@ final class ClientAdvertisementService
         private ClientAdvertisementRepository $clientAdvertisementRepository
     ) {}
 
+    public function payment(int $id)
+    {
+        $clientAdvertisement
+            = $this->clientAdvertisementRepository->getById($id);
+
+        $clientAdvertisement->update([
+            'is_payment'       => true,
+            'is_published'     => true,
+            'published_end_at' => now()->addYears(),
+        ]);
+    }
+
     public function unPublish(ClientAdvertisement $clientAdvertisement): void
     {
         $clientAdvertisement->update(['is_published' => false]);

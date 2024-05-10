@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Observers\ClientAdvertisementObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
+use YooKassa\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(Client::class, function () {
+            $client = new Client();
+
+            $client->setAuth(
+                config('yookassa.shop_id'),
+                config('yookassa.api_key')
+            );
+
+            return $client;
+        });
     }
 
     /**

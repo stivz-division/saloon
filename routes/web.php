@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomePage::class)
-->name('welcome');
+    ->name('welcome');
+
