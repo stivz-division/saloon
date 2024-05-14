@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 class ClientAdvertisement extends Model
@@ -98,6 +99,19 @@ class ClientAdvertisement extends Model
     public function isAuthor(int $userId): bool
     {
         return $this->user_id === $userId;
+    }
+
+    public function clientAdvertisementMasters(): HasMany
+    {
+        return $this->hasMany(ClientAdvertisementMaster::class);
+    }
+
+    public function itMasterPayment(int $masterId): bool
+    {
+        return $this
+            ->clientAdvertisementMasters
+            ->pluck('user_id')
+            ->contains($masterId);
     }
 
 }

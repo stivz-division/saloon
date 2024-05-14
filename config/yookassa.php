@@ -5,5 +5,7 @@ return [
     'api_key'    => env('YOOKASSA_API_KEY'),
     'return_url' => env('YOOKASSA_RETURN_URL'),
 
-    'client-advertisement' => 1000,
+    'client-advertisement'        => 50,
+    'master-client-advertisement' => 50,
+    'master-subscription'         => 50,
 ];

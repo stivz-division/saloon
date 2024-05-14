@@ -7,12 +7,14 @@ namespace App\Services;
 use App\Domain\DTO\ClientAdvertisementStoreData;
 use App\Models\ClientAdvertisement;
 use App\Repositories\ClientAdvertisementRepository;
+use App\Repositories\UserRepository;
 
 final class ClientAdvertisementService
 {
 
     public function __construct(
-        private ClientAdvertisementRepository $clientAdvertisementRepository
+        private ClientAdvertisementRepository $clientAdvertisementRepository,
+        private UserRepository $userRepository
     ) {}
 
     public function payment(int $id)
@@ -40,8 +42,23 @@ final class ClientAdvertisementService
             $uuidAdvertisement
         );
 
-        if ($checkUserId === $advertisement->user_id) {
+        if ($advertisement === null) {
+            return false;
+        }
+
+        $user = $this->userRepository->getById($checkUserId);
+
+        if ($user === null) {
+            return false;
+        }
+
+        if ($advertisement->isAuthor($user->id)) {
             return true;
+        }
+
+        if ($user->isMaster()) {
+            return $user->isActiveSubscription()
+                || $advertisement->itMasterPayment($user->id);
         }
 
         if ($advertisement === null) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Domain\Enum\YooKassaPaymentType;
 use App\Http\Requests\YookassaRequest;
+use App\YooKassa\MasterPaymentClientAdvertisement;
+use App\YooKassa\MasterPaymentSubscribe;
 use App\YooKassa\PaymentClientAdvertisement;
 use YooKassa\Model\Notification\NotificationEventType;
 use YooKassa\Model\Notification\NotificationSucceeded;
@@ -27,6 +29,20 @@ class YookassaController extends Controller
             === YooKassaPaymentType::ClientAdvertisement->value
         ) {
             (new PaymentClientAdvertisement($notification->object))
+                ->execute();
+        }
+
+        if ($notification->object->metadata->type
+            === YooKassaPaymentType::MasterClientAdvertisement->value
+        ) {
+            (new MasterPaymentClientAdvertisement($notification->object))
+                ->execute();
+        }
+
+        if ($notification->object->metadata->type
+            === YooKassaPaymentType::MasterSubscription->value
+        ) {
+            (new MasterPaymentSubscribe($notification->object))
                 ->execute();
         }
     }

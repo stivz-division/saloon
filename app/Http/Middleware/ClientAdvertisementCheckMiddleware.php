@@ -27,6 +27,14 @@ class ClientAdvertisementCheckMiddleware
             );
 
         if ($checkAdvertisement === false) {
+            if ($request->user()->isMaster()) {
+                return redirect(
+                    route('master-payment.client-advertisement', [
+                        'advertisement' => $advertisementUuid,
+                    ])
+                );
+            }
+
             abort(Response::HTTP_NOT_FOUND);
         }
 

@@ -111,4 +111,19 @@ class User extends Authenticatable
         return $this->hasMany(Pet::class, 'user_id', 'id');
     }
 
+    public function isActiveSubscription(): bool
+    {
+        if ($this->infoMaster->is_subscription === false) {
+            return false;
+        }
+
+        if ($this->infoMaster->subscription_end_at === null
+            || $this->infoMaster->subscription_end_at->isPast() === true
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

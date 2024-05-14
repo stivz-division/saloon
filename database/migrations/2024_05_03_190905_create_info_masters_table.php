@@ -44,6 +44,18 @@ return new class extends Migration {
                 ->comment('У себя?')
                 ->default(false);
 
+            $table->boolean('is_subscription')
+                ->comment('Активна ли подписка?')
+                ->default(false);
+
+            $table->timestamp('subscription_at')
+                ->comment('Дата начала подписки')
+                ->nullable();
+
+            $table->timestamp('subscription_end_at')
+                ->comment('Дата окончания подписки')
+                ->nullable();
+
             $table->timestamps();
         });
     }

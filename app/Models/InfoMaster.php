@@ -21,14 +21,20 @@ class InfoMaster extends Model implements HasMedia
             'is_at_home',
             'about',
             'breeds',
+            'is_subscription',
+            'subscription_at',
+            'subscription_end_at',
         ];
 
     protected $casts
         = [
-            'is_veterinarian'   => 'bool',
-            'is_delivering_pet' => 'bool',
-            'is_home_check_out' => 'bool',
-            'is_at_home'        => 'bool',
+            'is_veterinarian'     => 'bool',
+            'is_delivering_pet'   => 'bool',
+            'is_home_check_out'   => 'bool',
+            'is_at_home'          => 'bool',
+            'is_subscription'     => 'bool',
+            'subscription_at'     => 'datetime',
+            'subscription_end_at' => 'datetime',
         ];
 
 }

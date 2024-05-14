@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\IsMasterMiddleware;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -57,6 +58,13 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('client.advertisement.')
                 ->group(
                     base_path('routes/client-advertisement.php')
+                );
+
+            Route::middleware(['web', 'auth', IsMasterMiddleware::class])
+                ->prefix('master-payment')
+                ->name('master-payment.')
+                ->group(
+                    base_path('routes/master-payment.php')
                 );
         });
     }
