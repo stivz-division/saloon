@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Domain\Enum\AccountType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -27,6 +28,8 @@ class User extends Authenticatable
      */
     protected $fillable
         = [
+            'uuid',
+            'ref_id',
             'name',
             'surname',
             'account_type',
@@ -109,6 +112,11 @@ class User extends Authenticatable
     public function pets(): HasMany
     {
         return $this->hasMany(Pet::class, 'user_id', 'id');
+    }
+
+    public function ref(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function isActiveSubscription(): bool

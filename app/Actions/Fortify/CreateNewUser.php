@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Domain\Enum\AccountType;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -32,8 +33,17 @@ class CreateNewUser implements CreatesNewUsers
                 'max:255',
                 Rule::unique(User::class),
             ],
+            'ref_uuid'     => 'nullable|exists:users,uuid',
             'password'     => $this->passwordRules(),
         ])->validate();
+
+        $ref = null;
+
+        if (isset($input['ref_uuid'])) {
+            $userRepository = app(UserRepository::class);
+
+            $ref = $userRepository->getUserByUuid($input['ref_uuid']);
+        }
 
         return User::create([
             'account_type' => $input['account_type'],
@@ -41,6 +51,7 @@ class CreateNewUser implements CreatesNewUsers
             'surname'      => isset($input['surname']) ? $input['surname']
                 : null,
             'email'        => $input['email'],
+            'ref_id'       => $ref?->id,
             'password'     => Hash::make($input['password']),
         ]);
     }

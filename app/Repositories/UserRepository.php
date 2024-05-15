@@ -19,4 +19,9 @@ final class UserRepository
         return User::query()->find($id);
     }
 
+    public function getUserByUuid(string $uuid): ?User
+    {
+        return User::query()->where('uuid', $uuid)->first();
+    }
+
 }

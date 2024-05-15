@@ -5,20 +5,36 @@
 
         <form action="{{ route('register') }}" method="post">
             @csrf
+
+            @if($ref !== null)
+
+                <div class="p-3">
+                    @include('components.shared.ref-card', [
+                        'ref' => $ref
+                    ])
+                </div>
+
+                <input type="hidden" name="ref_uuid" value="{{ $ref->uuid }}">
+            @endif
+
             <div class="card-body">
                 <div class="mb-3">
                     <x-alert.block/>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="account_type">Тип аккаунта</label>
-                    <select wire:model.live="accountType" class="form-select" name="account_type" id="account_type"
-                            aria-label="Тип аккаунта">
-                        @foreach($accountTypes as $type)
-                            <option value="{{ $type->value }}">{{ $type->name() }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if($ref === null)
+                    <div class="mb-3">
+                        <label class="form-label" for="account_type">Тип аккаунта</label>
+                        <select wire:model.live="accountType" class="form-select" name="account_type" id="account_type"
+                                aria-label="Тип аккаунта">
+                            @foreach($accountTypes as $type)
+                                <option value="{{ $type->value }}">{{ $type->name() }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @else
+                    <input type="hidden" name="account_type" value="{{ $accountType }}">
+                @endif
 
 
                 @if($accountType === $saloonType)

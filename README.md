@@ -28,3 +28,17 @@ MEILISEARCH_HOST=
 MEILISEARCH_NO_ANALYTICS=false
 MEILISEARCH_KEY=
 ```
+
+### Тестовые данные
+
+```
+./vendor/bin/sail artisan db:seed --class=TestSeeder
+
+master:
+email: master@mail.ru
+password: password
+
+client:
+email:client@mail.ru
+password:password
+```

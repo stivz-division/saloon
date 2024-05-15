@@ -3,6 +3,7 @@
 namespace App\Livewire\Page\Auth;
 
 use App\Domain\Enum\AccountType;
+use App\Repositories\UserRepository;
 use Livewire\Component;
 
 class RegisterPage extends Component
@@ -10,9 +11,25 @@ class RegisterPage extends Component
 
     public $accountType;
 
+    /** @var \App\Models\User|null */
+    public $ref;
+
     public function mount()
     {
+        $ref_uuid       = request()->input('ref_uuid');
+        $userRepository = app(UserRepository::class);
+
+        if ($ref_uuid !== null) {
+            $this->ref = $userRepository->getUserByUuid(
+                $ref_uuid
+            );
+        }
+
         $this->accountType = AccountType::Client->value;
+
+        if ($this->ref !== null) {
+            $this->accountType = AccountType::Master->value;
+        }
     }
 
     public function render()
