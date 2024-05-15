@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Page\Advertisement\Client;
 
+use App\Domain\Enum\PromocodeType;
 use App\Domain\Enum\YooKassaPaymentType;
+use App\Services\ClientAdvertisementService;
 use Livewire\Component;
 use YooKassa\Client;
 use YooKassa\Model\CurrencyCode;
@@ -12,6 +14,26 @@ class Payment extends Component
 
     /** @var \App\Models\ClientAdvertisement */
     public $advertisement;
+
+    public $promocodeType;
+
+    public function mount()
+    {
+        $this->promocodeType = PromocodeType::ClientAdvertisement->value;
+    }
+
+    public function activatePromocode()
+    {
+        $clientAdvertisementService = app(ClientAdvertisementService::class);
+
+        $clientAdvertisementService->payment(
+            $this->advertisement->id,
+        );
+
+        $this->redirectRoute('client.advertisement.show', [
+            'advertisement' => $this->advertisement->uuid,
+        ]);
+    }
 
     public function render()
     {

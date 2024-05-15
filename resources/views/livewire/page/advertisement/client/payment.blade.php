@@ -12,5 +12,10 @@
             </button>
         </div>
 
+        <hr>
+
+        <livewire:components.promocode :type="$promocodeType" @activate="activatePromocode"/>
+
+
     </div>
 </div>

@@ -11,5 +11,11 @@
         </div>
 
         <a class="mt-3 d-block" href="{{ route('master-payment.subscription') }}">Или оформить подписку</a>
+
+        <hr>
+
+        <livewire:components.promocode :type="$promocodeType" @activate="activatePromocode"/>
+
+
     </div>
 </div>

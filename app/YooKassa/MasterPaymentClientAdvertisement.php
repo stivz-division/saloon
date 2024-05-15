@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\YooKassa;
 
 use App\Repositories\ClientAdvertisementRepository;
+use App\Services\MasterClientAdvertisementService;
 
 final class MasterPaymentClientAdvertisement extends BaseYooKassaHandler
 {
@@ -14,6 +15,10 @@ final class MasterPaymentClientAdvertisement extends BaseYooKassaHandler
         $clientAdvertisementRepository
             = app(ClientAdvertisementRepository::class);
 
+        $masterClientAdvertisementService
+            = app(MasterClientAdvertisementService::class);
+
+        /** @var \App\Models\ClientAdvertisement|null $advertisement */
         $advertisement
             = $clientAdvertisementRepository->getById((int) $this->payment->metadata->advertisement_id);
 
@@ -21,10 +26,11 @@ final class MasterPaymentClientAdvertisement extends BaseYooKassaHandler
             return;
         }
 
-        $advertisement->clientAdvertisementMasters()->firstOrCreate([
-            'user_id' => $this->payment->metadata->master_id,
-            'price'   => config('yookassa.master-client-advertisement'),
-        ]);
+        $masterClientAdvertisementService->activate(
+            $advertisement,
+            (int) $this->payment->metadata->master_id,
+            (float) config('yookassa.master-client-advertisement')
+        );
     }
 
 }

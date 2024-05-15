@@ -2,13 +2,17 @@
 
 namespace App\Livewire\Page\MasterPayment;
 
+use App\Domain\Enum\PromocodeType;
 use App\Domain\Enum\YooKassaPaymentType;
+use App\Services\UserService;
 use Livewire\Component;
 use YooKassa\Client;
 use YooKassa\Model\CurrencyCode;
 
 class SubscriptionPage extends Component
 {
+
+    public $promocodeType;
 
     public function mount()
     {
@@ -19,6 +23,19 @@ class SubscriptionPage extends Component
 
             $this->redirectRoute('welcome');
         }
+
+        $this->promocodeType = PromocodeType::MasterSubscription->value;
+    }
+
+    public function activatePromocode()
+    {
+        $userService = app(UserService::class);
+
+        $userService->masterPaymentSubscribe(
+            auth()->user(),
+        );
+        
+        $this->redirectRoute('welcome');
     }
 
     public function paymentAdvertisement()
