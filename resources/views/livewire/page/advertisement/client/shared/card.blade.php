@@ -1,5 +1,5 @@
 <h1>
-    Заявка {{ $advertisement->id }}
+    {{--    Заявка {{ $advertisement->id }}--}}
 </h1>
 
 @if($published && $advertisement->is_published)
@@ -7,9 +7,9 @@
 @endif
 
 <div class="p-3 rounded-4 bg-light mb-3">
-    <p class="mb-0">
+    <h4 class="mb-0" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
         {{ $advertisement->description }}
-    </p>
+    </h4>
 </div>
 
 @if($contacts)
@@ -25,16 +25,16 @@
 
 @if($advertisement->yandexLocation)
     <div class="p-3 rounded-4 bg-light mb-3">
-        <h2>Локация</h2>
+        {{--        <h2>Локация</h2>--}}
 
-        {{ $advertisement->yandexLocation->location }}
+        <h5>{{ $advertisement->yandexLocation->location }}</h5>
 
     </div>
 @endif
 
 @if($advertisement->datetime_service_at)
     <div class="p-3 rounded-4 bg-light mb-3">
-        <h2>Желаемая дата оказания услуги</h2>
+        <h6>Желаемая дата оказания услуги</h6>
 
         {{ $advertisement->datetime_service_at->toDateTimeString() }}
 

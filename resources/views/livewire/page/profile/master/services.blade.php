@@ -20,8 +20,8 @@
                         {{ number_format($service->price, 0, '.', ' ') }} руб.
                     </span>
                     <span
-                            wire:click.prevent="deleteService({{ $service->id }})"
-                            class="badge text-bg-danger rounded-pill fs-6"
+                        wire:click.prevent="deleteService({{ $service->id }})"
+                        class="badge text-bg-danger rounded-pill fs-6"
                     >Удалить</span>
                 </li>
             @endforeach
@@ -37,7 +37,7 @@
             <label for="title" class="form-label">Название услуги</label>
             <input wire:model="title" type="text" class="form-control"
                    id="title"
-                   placeholder="Название услуги" required>
+                   placeholder="Введите название услуги" required>
         </div>
 
         <div class="mb-3">

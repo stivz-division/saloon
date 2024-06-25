@@ -2,7 +2,8 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('welcome') }}">
-                LOGO
+                <img src="../../upload_media/photo/Scottie_glasses.png" class="img-fluid" style="max-height: 40px;"
+                     alt="LOGO">
                 <span class="badge text-bg-primary">
                     {{ auth()->user()->account_type->name() }}
                 </span>
