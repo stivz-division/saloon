@@ -71,6 +71,7 @@ final class ClientAdvertisementRepository
     {
         return ClientAdvertisement::query()
             ->whereIn('id', $ids)
+            ->latest()
             ->get();
     }
 
