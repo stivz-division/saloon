@@ -1,5 +1,5 @@
 <div>
-    <h2>Примеры работ</h2>
+    <h2>Портфолио</h2>
 
     <x-alert.block/>
 
@@ -22,10 +22,10 @@
 
                         <a href="{{ $item->getFullUrl() }}" target="_blank">
                             <img
-                                    class="rounded-3"
-                                    style="object-fit: cover; width: 154px; height: 154px"
-                                    src="{{ $item->getFullUrl() }}"
-                                    alt="{{ $item->name }}"
+                                class="rounded-3"
+                                style="object-fit: cover; width: 154px; height: 154px"
+                                src="{{ $item->getFullUrl() }}"
+                                alt="{{ $item->name }}"
                             >
                         </a>
                     </div>
@@ -52,7 +52,7 @@
 
     <form wire:submit.prevent="uploadFile">
         <div class="mb-3">
-            <label for="file" class="form-label">Вы можете загрузить фото или видео</label>
+            <label for="file" class="form-label">Вы можете загрузить фото и видео</label>
             <input wire:model="file" class="form-control" accept="image/*,video/*" name="file" type="file" id="file"
                    required>
         </div>

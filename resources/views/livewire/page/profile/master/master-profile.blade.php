@@ -41,11 +41,6 @@
             <textarea wire:model="about" class="form-control" name="about" id="about" rows="12"></textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="breeds" class="form-label">Породы с которыми работаете</label>
-            <textarea wire:model="breeds" class="form-control" name="breeds" id="breeds" rows="6"></textarea>
-        </div>
-
         <div>
             <button type="button" wire:click="saveInfo" class="btn btn-primary d-inline-block">
                 Сохранить изменения
@@ -53,17 +48,17 @@
         </div>
     </div>
 
-    <div class="p-3 rounded-4 bg-light mb-3">
-        <livewire:page.profile.master.services :user="$user"/>
-    </div>
+    {{--    <div class="p-3 rounded-4 bg-light mb-3">--}}
+    {{--        <livewire:page.profile.master.services :user="$user"/>--}}
+    {{--    </div>--}}
 
     <div class="p-3 rounded-4 bg-light mb-3">
         <livewire:page.profile.master.examples-works :user="$user"/>
     </div>
 
-    <div class="p-3 rounded-4 bg-light mb-3">
-        <livewire:page.profile.master.animals :user="$user"/>
-    </div>
+    {{--    <div class="p-3 rounded-4 bg-light mb-3">--}}
+    {{--        <livewire:page.profile.master.animals :user="$user"/>--}}
+    {{--    </div>--}}
 
     <div class="p-3 rounded-2 bg-light">
         <livewire:page.profile.master.location :user="$user"/>

@@ -23,6 +23,9 @@
             </div>
 
         @endif
+    </div>
+    <div class="p-3 rounded-4 bg-light mb-3">
+        <h2>Добавить питомца</h2>
         <form wire:submit.prevent="savePet">
             <div class="mb-3">
                 <label for="nickname" class="form-label">Кличка</label>
@@ -65,7 +68,7 @@
                 </div>
             @endif
 
-            <input class="btn btn-primary" type="submit" value="Сохранить">
+            <input class="btn btn-primary" type="submit" value="Добавить">
 
         </form>
     </div>
