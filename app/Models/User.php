@@ -39,6 +39,7 @@ class User extends Authenticatable
             'dop_phone',
             'telegram',
             'whatsapp',
+            'avatar_path',
         ];
 
     /**
