@@ -1,6 +1,10 @@
 <div>
     <h1>Профиль</h1>
 
+    <div class="mb-3">
+        <livewire:page.profile.avatar :user="$user"/>
+    </div>
+
     @if($user->ref !== null)
         <div class="mb-3">
             @include('components.shared.ref-card', [

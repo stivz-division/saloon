@@ -41,24 +41,30 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Название салона</label>
                         <input name="name" class="form-control" type="text" placeholder="Введите название салона"
+                               value="{{ old('name') }}"
                                required>
                     </div>
                 @else
                     <div class="mb-3">
                         <label class="form-label" for="name">Имя</label>
-                        <input name="name" class="form-control" type="text" placeholder="Введите имя" required>
+                        <input name="name" class="form-control" type="text" placeholder="Введите имя"
+                               value="{{ old('name') }}"
+                               required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="surname">Фамилия</label>
-                        <input name="surname" class="form-control" type="text" placeholder="Введите фамилию" required>
+                        <input name="surname" class="form-control" type="text" placeholder="Введите фамилию"
+                               value="{{ old('surname') }}"
+                               required>
                     </div>
                 @endif
 
 
                 <div class="mb-3">
                     <label class="form-label" for="email">E-Mail</label>
-                    <input name="email" class="form-control" type="email" placeholder="Введите email" required>
+                    <input name="email" class="form-control" type="email" placeholder="Введите email"
+                           required>
                 </div>
 
 

@@ -25,7 +25,7 @@ class RegisterPage extends Component
             );
         }
 
-        $this->accountType = AccountType::Client->value;
+        $this->accountType = old('account_type', AccountType::Client->value);
 
         if ($this->ref !== null) {
             $this->accountType = AccountType::Master->value;
