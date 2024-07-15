@@ -60,6 +60,15 @@ class RouteServiceProvider extends ServiceProvider
                     base_path('routes/client-advertisement.php')
                 );
 
+            Route::middleware([
+                'web',
+            ])
+                ->prefix('master/advertisement')
+                ->name('master.advertisement.')
+                ->group(
+                    base_path('routes/master-advertisement.php')
+                );
+
             Route::middleware(['web', 'auth', IsMasterMiddleware::class])
                 ->prefix('master-payment')
                 ->name('master-payment.')
