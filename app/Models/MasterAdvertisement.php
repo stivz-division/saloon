@@ -4,9 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 
-class MasterAdvertisement extends Model
+class MasterAdvertisement extends Model implements HasMedia
 {
+
+    use InteractsWithMedia;
+
+    const MEDIA_COLLECTION_NAME = 'master-advertisement';
 
     protected $fillable
         = [
@@ -48,6 +55,11 @@ class MasterAdvertisement extends Model
     {
         return $this->belongsToMany(Breed::class,
             'master_advertisement_breeds');
+    }
+
+    public function images(): MediaCollection
+    {
+        return $this->getMedia(self::MEDIA_COLLECTION_NAME);
     }
 
 }
