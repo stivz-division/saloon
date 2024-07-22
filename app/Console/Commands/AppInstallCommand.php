@@ -43,6 +43,8 @@ class AppInstallCommand extends Command
             'parse:dogs',
             'parse:yandex-location',
             'scout:sync-index-settings',
+            'db:seed --class=TestSeeder',
+            'db:seed --class=SubscriptionSeeder',
         ];
 
     /**
@@ -50,7 +52,7 @@ class AppInstallCommand extends Command
      */
     public function handle()
     {
-        $countActions = 8;
+        $countActions = 10;
 
         $bar = $this->output->createProgressBar($countActions);
 

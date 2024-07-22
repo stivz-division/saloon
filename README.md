@@ -32,13 +32,17 @@ MEILISEARCH_KEY=
 ### Тестовые данные
 
 ```
-./vendor/bin/sail artisan db:seed --class=TestSeeder
+Если env !== production, то при app:install будут созданы следующие пользователи:
 
 master:
 email: master@mail.ru
 password: password
 
 client:
-email:client@mail.ru
+email: client@mail.ru
 password:password
+
+admin: [/nova]
+email: admin@mail.ru
+password: password
 ```

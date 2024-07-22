@@ -40,6 +40,9 @@ class User extends Authenticatable
             'telegram',
             'whatsapp',
             'avatar_path',
+            'subscription_start_at',
+            'subscription_end_at',
+            'subscription_id',
         ];
 
     /**
@@ -60,14 +63,21 @@ class User extends Authenticatable
      */
     protected $casts
         = [
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
-            'account_type'      => AccountType::class,
+            'email_verified_at'     => 'datetime',
+            'password'              => 'hashed',
+            'account_type'          => AccountType::class,
+            'subscription_start_at' => 'datetime',
+            'subscription_end_at'   => 'datetime',
         ];
 
     public function isSaloon(): bool
     {
         return $this->account_type === AccountType::Saloon;
+    }
+
+    public function subscription(): BelongsTo
+    {
+        return $this->belongsTo(Subscription::class);
     }
 
     public function isClient(): bool

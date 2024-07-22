@@ -2,24 +2,21 @@
 
 namespace App\Nova;
 
-use Illuminate\Validation\Rules;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class User extends Resource
+class Subscription extends Resource
 {
 
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\User>
+     * @var class-string<\App\Models\Subscription>
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\Subscription::class;
 
     /**
      * The single value that should be used to represent the resource when
@@ -38,17 +35,17 @@ class User extends Resource
      */
     public static $search
         = [
-            'id', 'name', 'email',
+            'id', 'name',
         ];
 
     public static function label()
     {
-        return 'Пользователи';
+        return 'Подписки';
     }
 
     public static function singularLabel()
     {
-        return 'Пользователь';
+        return 'Подписка';
     }
 
     /**
@@ -63,30 +60,28 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth(50),
-
-            Text::make('Name')
+            Text::make('Название', 'name')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->required()
+                ->rules('required'),
 
-            Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+            Number::make('Объявлений', 'advertisement_count')
+                ->step(1)
+                ->required()
+                ->rules('required', 'min:1'),
 
-            BelongsTo::make('Подписка', 'subscription', Subscription::class)
-                ->nullable()
-                ->showCreateRelationButton(),
-            DateTime::make('Дата подписки', 'subscription_start_at')
-                ->nullable(),
-            DateTime::make('Дата окончания подписки', 'subscription_end_at')
-                ->nullable(),
+            Number::make('Дней размещения', 'published_days')
+                ->step(1)
+                ->required()
+                ->rules('required', 'min:1'),
 
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
+            Number::make('Цена', 'price')
+                ->step(1)
+                ->required()
+                ->rules('required'),
+
+            Boolean::make('Активен', 'status')
+                ->default(false),
         ];
     }
 

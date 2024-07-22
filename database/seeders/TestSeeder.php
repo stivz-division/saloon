@@ -22,7 +22,19 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         $password = Hash::make('password');
+
+        $admin = User::create([
+            'account_type' => AccountType::Client->value,
+            'name'         => 'ADMIN',
+            'surname'      => 'ADMIN',
+            'email'        => 'admin@mail.ru',
+            'password'     => $password,
+        ]);
 
         $petService          = app(PetService::class);
         $petWeightRepository = app(PetWeightRepository::class);
