@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Page\Advertisement\Master;
 
+use App\Domain\DTO\MasterAdvertisementStoreData;
 use App\Domain\Enum\AnimalType;
 use App\Livewire\Components\Hepler\MultiSelect\Location;
 use App\Repositories\AnimalRepository;
 use App\Repositories\BreedRepository;
 use App\Repositories\PetWeightRepository;
+use App\Services\MasterAdvertisementService;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -32,12 +34,22 @@ class MasterAdvertisementPage extends Component
     #[Validate('nullable|date_format:Y-m-d')]
     public $end_at;
 
+    #[Validate('required|exists:animals,id')]
     public $animal;
+
+    #[Validate('required|exists:pet_weights,id')]
+    public $pet_weight;
+
+    #[Validate('nullable|exists:breeds,id')]
+    public $breed;
+
+    #[Validate('required|numeric|min:1')]
+    public $price;
 
     public $dogAnimal;
 
     public $animals;
-    
+
     public $breeds;
 
     public $petWeights;
@@ -53,7 +65,7 @@ class MasterAdvertisementPage extends Component
                 'value' => $location->id,
                 'name'  => $location->location,
             ];
-        });
+        })->toArray();
 
         $animalRepository    = app(AnimalRepository::class);
         $petWeightRepository = app(PetWeightRepository::class);
@@ -73,6 +85,27 @@ class MasterAdvertisementPage extends Component
     public function save()
     {
         $this->validate();
+
+        app(MasterAdvertisementService::class)
+            ->store(
+                auth()->user(),
+                new MasterAdvertisementStoreData(
+                    $this->name,
+                    $this->description,
+                    $this->animal ? [$this->animal] : [],
+                    // TODO: Получать массив
+                    $this->pet_weight ? [$this->pet_weight] : [],
+                    // TODO: Получать массив
+                    $this->breed ? [$this->breed] : [], // TODO: Получать массив
+                    $this->price,
+                    $this->start_at,
+                    $this->end_at,
+                    $this->locations,
+                    $this->photos,
+                )
+            );
+
+        $this->redirectRoute('profile');
     }
 
     public function render()

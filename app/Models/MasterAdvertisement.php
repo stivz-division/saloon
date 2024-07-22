@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -17,21 +18,31 @@ class MasterAdvertisement extends Model implements HasMedia
 
     protected $fillable
         = [
+            'user_id',
             'title',
             'start_at',
             'end_at',
             'description',
             'price',
             'status',
+            'published_at',
+            'end_published_at',
         ];
 
     protected $casts
         = [
-            'start_at' => 'date',
-            'end_at'   => 'date',
-            'price'    => 'float',
-            'status'   => 'bool',
+            'start_at'         => 'date',
+            'end_at'           => 'date',
+            'price'            => 'float',
+            'status'           => 'bool',
+            'published_at'     => 'datetime',
+            'end_published_at' => 'datetime',
         ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function locations(): BelongsToMany
     {
