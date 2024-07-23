@@ -1,6 +1,12 @@
 <div>
     <h1>Профиль</h1>
 
+    @if($user->isMaster())
+        <div class="mb-3">
+            <livewire:page.profile.master.subscription :user="$user"/>
+        </div>
+    @endif
+
     <div class="mb-3">
         <livewire:page.profile.avatar :user="$user"/>
     </div>
@@ -16,7 +22,6 @@
     <livewire:page.profile.contacts :user="$user"/>
 
     @if($user->isMaster())
-
         <div class="mb-3">
             <livewire:page.profile.master.ref-link :user="$user"/>
         </div>

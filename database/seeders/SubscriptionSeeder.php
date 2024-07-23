@@ -20,7 +20,7 @@ class SubscriptionSeeder extends Seeder
             'price'               => 100,
             'status'              => true,
         ]);
-        
+
         Subscription::query()->create([
             'name'                => '1 БИЧ ПАКЕТ +',
             'advertisement_count' => 1,
@@ -49,7 +49,7 @@ class SubscriptionSeeder extends Seeder
             'name'                => '1 БИЧ ПАКЕТ Pro Max +',
             'advertisement_count' => 1,
             'published_days'      => 365,
-            'price'               => 100,
+            'price'               => 800,
             'status'              => true,
         ]);
     }

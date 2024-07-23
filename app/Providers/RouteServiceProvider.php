@@ -75,6 +75,13 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(
                     base_path('routes/master-payment.php')
                 );
+
+            Route::middleware(['web', 'auth', IsMasterMiddleware::class])
+                ->prefix('subscription')
+                ->name('subscription.')
+                ->group(
+                    base_path('routes/subscription.php')
+                );
         });
     }
 

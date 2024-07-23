@@ -10,5 +10,6 @@ enum YooKassaPaymentType: string
     case ClientAdvertisement = 'client_advertisement';
     case MasterClientAdvertisement = 'master_client_advertisement';
     case MasterSubscription = 'master_subscription';
+    case MasterSubscriptionAdvertisement = 'master_subscription_advertisement';
 
 }

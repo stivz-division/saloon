@@ -13,11 +13,22 @@ use Illuminate\Support\Facades\DB;
 final class MasterAdvertisementService
 {
 
+    public function __construct(
+        public SubscriptionService $subscriptionService,
+    ) {}
+
     public function store(
         User $author,
         MasterAdvertisementStoreData $data
     ): MasterAdvertisement {
-        // TODO: Добавить проверку на подписку...
+        $checkCanCreateAdvertisement
+            = $this->subscriptionService->checkCanCreateAdvertisement(
+            $author
+        );
+
+        if ($checkCanCreateAdvertisement === false) {
+            throw new \Exception('Лимит на создание объявлений достигнут! Перейдите на другую подписку, чтобы его увеличить!');
+        }
 
         DB::beginTransaction();
 

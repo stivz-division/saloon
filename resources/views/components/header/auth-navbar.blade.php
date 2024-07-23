@@ -54,6 +54,7 @@
                     @endif
 
                     @if(auth()->user()->isMaster())
+                        @include('components.shared.subscription-link')
                         @include('components.shared.master-advertisement-link')
                     @endif
                     <button class="btn btn-outline-danger">Выйти</button>

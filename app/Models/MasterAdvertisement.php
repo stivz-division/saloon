@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -71,6 +72,11 @@ class MasterAdvertisement extends Model implements HasMedia
     public function images(): MediaCollection
     {
         return $this->getMedia(self::MEDIA_COLLECTION_NAME);
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status', true);
     }
 
 }

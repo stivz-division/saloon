@@ -9,6 +9,7 @@ use App\Repositories\AnimalRepository;
 use App\Repositories\BreedRepository;
 use App\Repositories\PetWeightRepository;
 use App\Services\MasterAdvertisementService;
+use App\Services\SubscriptionService;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -56,6 +57,17 @@ class MasterAdvertisementPage extends Component
 
     public function mount()
     {
+        $checkSubscription
+            = app(SubscriptionService::class)->checkCanCreateAdvertisement(
+            auth()->user(),
+        );
+
+        if ($checkSubscription === false) {
+            //            session()->flash('success',
+            //                'Лимит на создание объявлений достигнут! Перейдите на другую подписку, чтобы его увеличить!');
+            $this->redirectRoute('subscription.list');
+        }
+
         $breedsRepository = app(BreedRepository::class);
 
         $this->locations = auth()->user()->workingLocations->map(function (

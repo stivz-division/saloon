@@ -145,4 +145,9 @@ class User extends Authenticatable
         return true;
     }
 
+    public function masterAdvertisements(): HasMany
+    {
+        return $this->hasMany(MasterAdvertisement::class, 'user_id', 'id');
+    }
+
 }
