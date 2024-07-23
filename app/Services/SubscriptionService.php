@@ -15,6 +15,11 @@ final class SubscriptionService
         return config('domain.free_advertisements');
     }
 
+    public function getFreeAdvertisementPublishDays(User $user): int
+    {
+        return config('domain.free_published_days');
+    }
+
     /** Тут проверяем подписку клиента! Может ли он создавать объявления! */
     public function checkCanCreateAdvertisement(User $user): bool
     {
@@ -23,15 +28,31 @@ final class SubscriptionService
             ->active()
             ->count();
 
+        $maxAdvertisementCount = $this->getMaxAdvertisementCount($user);
+
+        return $activeMasterAdvertisements < $maxAdvertisementCount;
+    }
+
+    public function isFreeAdvertisement(User $user): bool
+    {
+        $activeMasterAdvertisements = $user
+            ->masterAdvertisements()
+            ->active()
+            ->count();
+
+        return $activeMasterAdvertisements
+            < $this->getFreeAdvertisementCount($user);
+    }
+
+    public function getMaxAdvertisementCount($user): int
+    {
         $userSubscription = $user->subscription;
 
         $subscriptionAdvertisementCount
             = $userSubscription?->advertisement_count ?? 0;
 
-        $maxAdvertisementCount = $this->getFreeAdvertisementCount($user)
+        return $this->getFreeAdvertisementCount($user)
             + $subscriptionAdvertisementCount;
-
-        return $activeMasterAdvertisements < $maxAdvertisementCount;
     }
 
     /** Устанавливаем подписку пользователю */

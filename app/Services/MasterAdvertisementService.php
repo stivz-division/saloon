@@ -44,7 +44,9 @@ final class MasterAdvertisementService
                 : null,
             'price'            => $data->price,
             'published_at'     => now(),
-            'end_published_at' => now()->addDays(30),
+            'end_published_at' => $this->subscriptionService->isFreeAdvertisement($author)
+                ? now()->addDays($this->subscriptionService->getFreeAdvertisementPublishDays($author))
+                : now()->addDays($author->subscription->published_days),
             'status'           => true,
         ]);
 
