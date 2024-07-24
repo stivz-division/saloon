@@ -8,7 +8,6 @@
     <livewire:components.multi-select
             :service="$serviceLocation"
             @change-selected="setLocations($event.detail.selected)"
-            max="1"
             :set="$locations"
             placeholder="Укажите места работы"
     />
