@@ -24,13 +24,15 @@
         <div class="row row-cols-1 row-cols-lg-3 mb-3 g-2">
             @foreach($advertisements as $advertisement)
                 <div class="col">
-                    @include('livewire.page.advertisement.master.shared.card')
+                    @include('livewire.page.advertisement.master.shared.card', [
+                        'control' => false
+                    ])
                 </div>
             @endforeach
         </div>
 
         {{ $paginator->links() }}
-        
+
     @else
         <h2>Пока нет услуг</h2>
     @endif

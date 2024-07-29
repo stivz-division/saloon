@@ -70,7 +70,7 @@
         @if($advertisement->images()->count())
             <div class="row row-cols-auto g-1">
                 @foreach($advertisement->images() as $image)
-                    <div class="col p-0">
+                    <div class="col p-1">
                         <img
                                 class="img-fluid"
                                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 25px"
@@ -84,4 +84,23 @@
         @endif
 
     </div>
+    @if($control)
+        <div class="card-footer text-end">
+            <a
+                    href="{{ route('master.advertisement.edit', [
+                        'masterAdvertisement' => $advertisement->id
+                    ]) }}"
+                    class="btn btn-primary me-2"
+            >
+                Редактировать
+            </a>
+            <button
+                    wire:click.prevent="deleteAdvertisement({{ $advertisement->id }})"
+                    wire:confirm="Вы уверены, что хотите удалить услугу?"
+                    class="btn btn-danger"
+            >
+                Удалить
+            </button>
+        </div>
+    @endif
 </div>

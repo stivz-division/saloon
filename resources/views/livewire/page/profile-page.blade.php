@@ -5,6 +5,9 @@
         <div class="mb-3">
             <livewire:page.profile.master.subscription :user="$user"/>
         </div>
+        <div class="mb-3">
+            <livewire:page.profile.master.my-advertisements :user="$user"/>
+        </div>
     @endif
 
     <div class="mb-3">

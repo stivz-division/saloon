@@ -66,4 +66,37 @@ final class MasterAdvertisementService
         return $advertisement;
     }
 
+    public function update(
+        MasterAdvertisement $masterAdvertisement,
+        MasterAdvertisementStoreData $data
+    ): MasterAdvertisement {
+        DB::beginTransaction();
+
+        $masterAdvertisement->update([
+            'title'       => $data->name,
+            'description' => $data->description,
+            'start_at'    => $data->start_at
+                ? Carbon::parse($data->start_at)
+                : null,
+            'end_at'      => $data->end_at ? Carbon::parse($data->end_at)
+                : null,
+            'price'       => $data->price,
+        ]);
+
+        $masterAdvertisement->animals()->sync($data->animals);
+        $masterAdvertisement->locations()->sync(collect($data->locations)
+            ->pluck('value')->toArray());
+        $masterAdvertisement->petWeights()->sync($data->pet_weights);
+        $masterAdvertisement->breeds()->sync($data->breeds);
+
+        DB::commit();
+
+        foreach ($data->photos as $photo) {
+            $masterAdvertisement->addMedia($photo)
+                ->toMediaCollection(MasterAdvertisement::MEDIA_COLLECTION_NAME);
+        }
+
+        return $masterAdvertisement;
+    }
+
 }

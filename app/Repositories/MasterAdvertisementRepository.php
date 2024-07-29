@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Domain\DTO\MasterAdvertisementFilterData;
 use App\Models\MasterAdvertisement;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -47,9 +48,25 @@ final class MasterAdvertisementRepository
     }
 
     /**
+     * @param  User  $user
+     * @param  int  $perPage
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getUserAdvertisementsPaginate(
+        User $user,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return MasterAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->with(['media', 'locations'])
+            ->paginate($perPage);
+    }
+
+    /**
      * @param  int  $id
      *
-     * @return \App\Models\MasterAdvertisement|null
+     * @return MasterAdvertisement|null
      */
     public function getById(int $id): ?MasterAdvertisement
     {
