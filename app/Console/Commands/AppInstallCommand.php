@@ -45,6 +45,7 @@ class AppInstallCommand extends Command
             'scout:sync-index-settings',
             'db:seed --class=TestSeeder',
             'db:seed --class=SubscriptionSeeder',
+            'db:seed --class=TopTariffsSeeder',
         ];
 
     /**

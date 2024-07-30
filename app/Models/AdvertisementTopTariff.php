@@ -14,6 +14,7 @@ class AdvertisementTopTariff extends Model
             'name',
             'count_days',
             'type',
+            'price',
             'start_time',
             'minutes',
             'status',

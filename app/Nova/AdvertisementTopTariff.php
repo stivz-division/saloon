@@ -74,6 +74,12 @@ class AdvertisementTopTariff extends Resource
                 ->required()
                 ->rules('required', 'min:1'),
 
+            Number::make('Цена', 'price')
+                ->step(1)
+                ->default(1)
+                ->required()
+                ->rules('required', 'numeric', 'min:0'),
+
             Select::make('Тип', 'type')
                 ->onlyOnForms()
                 ->options(

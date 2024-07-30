@@ -101,6 +101,18 @@
             >
                 Удалить
             </button>
+            @if($advertisement->advertisementTopTariff === null)
+                <div>
+                    <a
+                            href="{{ route('master.advertisement.top', [
+                        'masterAdvertisement' => $advertisement->id
+                    ]) }}"
+                            class="btn btn-warning mt-2"
+                    >
+                        Поднять в ТОП
+                    </a>
+                </div>
+            @endif
         </div>
     @endif
 </div>

@@ -59,7 +59,7 @@ final class MasterAdvertisementRepository
     ): LengthAwarePaginator {
         return MasterAdvertisement::query()
             ->where('user_id', $user->id)
-            ->with(['media', 'locations'])
+            ->with(['media', 'locations', 'advertisementTopTariff'])
             ->paginate($perPage);
     }
 

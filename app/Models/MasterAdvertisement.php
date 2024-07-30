@@ -57,6 +57,8 @@ class MasterAdvertisement extends Model implements HasMedia
             'start_at',
             'end_at',
             'description',
+            'advertisement_top_tariff_id',
+            'set_top_tariff_at',
             'price',
             'is_published',
             'published_at',
@@ -65,12 +67,13 @@ class MasterAdvertisement extends Model implements HasMedia
 
     protected $casts
         = [
-            'start_at'         => 'date',
-            'end_at'           => 'date',
-            'price'            => 'float',
-            'is_published'     => 'bool',
-            'published_at'     => 'datetime',
-            'end_published_at' => 'datetime',
+            'start_at'          => 'date',
+            'end_at'            => 'date',
+            'price'             => 'float',
+            'is_published'      => 'bool',
+            'published_at'      => 'datetime',
+            'end_published_at'  => 'datetime',
+            'set_top_tariff_at' => 'datetime',
         ];
 
     public function toSearchableArray()
@@ -96,6 +99,11 @@ class MasterAdvertisement extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function advertisementTopTariff(): BelongsTo
+    {
+        return $this->belongsTo(AdvertisementTopTariff::class);
     }
 
     public function locations(): BelongsToMany
