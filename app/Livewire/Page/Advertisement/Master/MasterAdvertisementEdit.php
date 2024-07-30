@@ -86,8 +86,9 @@ class MasterAdvertisementEdit extends Component
         $this->name        = $this->masterAdvertisement->title;
         $this->description = $this->masterAdvertisement->description;
         $this->start_at
-                           = $this->masterAdvertisement->start_at->toDateString();
-        $this->end_at      = $this->masterAdvertisement->end_at->toDateString();
+                           = $this->masterAdvertisement->start_at?->toDateString();
+        $this->end_at
+                           = $this->masterAdvertisement->end_at?->toDateString();
         $this->price       = $this->masterAdvertisement->price;
 
         // TODO: // переделать на массив
