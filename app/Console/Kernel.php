@@ -14,6 +14,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('check:client-advertisement')->hourly();
+
+        $schedule->command('app:raise-ad')
+            ->runInBackground()
+            ->withoutOverlapping()
+            ->everyMinute();
     }
 
     /**

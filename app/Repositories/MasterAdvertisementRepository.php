@@ -34,6 +34,8 @@ final class MasterAdvertisementRepository
                 $options['facets']   = MasterAdvertisement::FACETS;
                 $options['filter'][] = 'is_published = true';
 
+                $options['sort'] = ['top_at:desc'];
+
                 if (count($filterData->locations)) {
                     $options['filter'][] = 'locations IN ['
                         .implode(',', $filterData->locations).']';
@@ -77,7 +79,7 @@ final class MasterAdvertisementRepository
     {
         return MasterAdvertisement::query()
             ->whereIn('id', $ids)
-            ->latest()
+            ->latest('top_at')
             ->get();
     }
 

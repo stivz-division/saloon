@@ -20,7 +20,7 @@ class TimeCast implements CastsAttributes
         mixed $value,
         array $attributes
     ): mixed {
-        return Carbon::parse($value)->format('H:i');
+        return Carbon::parse($value)->format('H:i:s');
     }
 
     /**

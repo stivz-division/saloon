@@ -48,6 +48,7 @@ class MasterAdvertisement extends Model implements HasMedia
             'published_at',
             'end_published_at',
             'created_at',
+            'top_at',
         ];
 
     protected $fillable
@@ -59,6 +60,7 @@ class MasterAdvertisement extends Model implements HasMedia
             'description',
             'advertisement_top_tariff_id',
             'set_top_tariff_at',
+            'top_at',
             'price',
             'is_published',
             'published_at',
@@ -74,6 +76,7 @@ class MasterAdvertisement extends Model implements HasMedia
             'published_at'      => 'datetime',
             'end_published_at'  => 'datetime',
             'set_top_tariff_at' => 'datetime',
+            'top_at'            => 'datetime',
         ];
 
     public function toSearchableArray()

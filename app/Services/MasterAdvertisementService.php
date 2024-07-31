@@ -48,6 +48,7 @@ final class MasterAdvertisementService
                 ? now()->addDays($this->subscriptionService->getFreeAdvertisementPublishDays($author))
                 : now()->addDays($author->subscription->published_days),
             'is_published'     => true,
+            'top_at'           => now(),
         ]);
 
         $advertisement->animals()->sync($data->animals);
