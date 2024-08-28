@@ -19,12 +19,41 @@
             >
         </div>
 
+        <hr>
+
+        @if(isset($facetDistribution['animal']))
+
+            <livewire:page.advertisement.client.facet.animals
+                    @change-animals="selectAnimals($event.detail.selected)"
+                    :select-animals="$animals"
+                    wire:key="{{ uniqid('', true) }}"
+                    :animals="$facetDistribution['animal']"
+            />
+
+            <hr>
+
+        @endif
+
+
+        @if(isset($facetDistribution['breed_id']))
+
+            <livewire:page.advertisement.client.facet.breeds
+                    @change-breeds="selectBreeds($event.detail.selected)"
+                    :select-breeds="$breeds"
+                    wire:key="{{ uniqid('', true) }}"
+                    :breeds="$facetDistribution['breed_id']"
+            />
+
+            <hr>
+
+        @endif
+
         @if(isset($facetDistribution['yandex_location_id']))
             <div>
                 <livewire:page.advertisement.client.facet.client-advertisement-location
                         @change-locations="selectLocations($event.detail.selected)"
                         :select-locations="$locations"
-                        wire:key="{{ implode(',', $facetDistribution['yandex_location_id']) }}"
+                        wire:key="{{ uniqid('', true) }}"
                         :locations="$facetDistribution['yandex_location_id']"
                 />
             </div>

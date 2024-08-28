@@ -15,6 +15,9 @@ class ClientAdvertisement extends Model
     public const FACETS
         = [
             'yandex_location_id',
+            'pet_id',
+            'animal',
+            'breed_id',
         ];
 
     public const FILTERED_ATTRIBUTES
@@ -25,6 +28,8 @@ class ClientAdvertisement extends Model
             'yandex_location_id',
             'is_payment',
             'is_published',
+            'animal',
+            'breed_id',
         ];
 
     public const SORTABLE_ATTRIBUTES
@@ -70,6 +75,8 @@ class ClientAdvertisement extends Model
             'id'                  => $this->id,
             'user_id'             => $this->user_id,
             'pet_id'              => $this->pet_id,
+            'animal'              => $this->pet->animal->title,
+            'breed_id'            => $this->pet->breed_id,
             'yandex_location_id'  => $this->yandex_location_id,
             'description'         => $this->description,
             'datetime_service_at' => $this->datetime_service_at,

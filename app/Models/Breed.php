@@ -19,4 +19,6 @@ class Breed extends Model
         return $this->belongsTo(AnimalType::class, 'animal_id');
     }
 
+    public function client() {}
+
 }

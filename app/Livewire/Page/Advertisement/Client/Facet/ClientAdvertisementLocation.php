@@ -25,8 +25,6 @@ class ClientAdvertisementLocation extends Component
     {
         $yandexLocationRepository = app(YandexLocationRepository::class);
 
-        //        $idLocations = array_keys($this->locations);
-
         $idLocations = DB::table('client_advertisements')
             ->distinct()
             ->select('yandex_location_id')

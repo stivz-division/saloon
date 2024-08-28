@@ -17,11 +17,29 @@ class ClientAdvertisementListPage extends Component
 
     public $locations = [];
 
+    public $animals = [];
+
+    public $breeds = [];
+
     public function selectLocations($locations)
     {
         $this->setPage(1);
-        
+
         $this->locations = $locations;
+    }
+
+    public function selectAnimals($animals)
+    {
+        $this->setPage(1);
+
+        $this->animals = $animals;
+    }
+
+    public function selectBreeds($breeds)
+    {
+        $this->setPage(1);
+
+        $this->breeds = $breeds;
     }
 
     public function render()
@@ -34,6 +52,8 @@ class ClientAdvertisementListPage extends Component
             $this->search,
             new ClientAdvertisementFilterData(
                 $this->locations,
+                $this->animals,
+                $this->breeds
             ),
             4
         );

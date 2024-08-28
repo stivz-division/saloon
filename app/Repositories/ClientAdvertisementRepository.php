@@ -37,6 +37,16 @@ final class ClientAdvertisementRepository
                         .implode(',', $filterData->locations).']';
                 }
 
+                if (count($filterData->animals)) {
+                    $options['filter'][] = 'animal IN ['
+                        .implode(',', $filterData->animals).']';
+                }
+
+                if (count($filterData->breeds)) {
+                    $options['filter'][] = 'breed_id IN ['
+                        .implode(',', $filterData->breeds).']';
+                }
+
                 return $meilisearch->search($query, $options);
             })
             ->query(fn(Builder $query) => $query->with([

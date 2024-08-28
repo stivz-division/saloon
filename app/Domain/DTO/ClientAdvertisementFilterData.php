@@ -9,6 +9,8 @@ final class ClientAdvertisementFilterData
 
     public function __construct(
         public readonly array $locations = [],
+        public readonly array $animals = [],
+        public readonly array $breeds = [],
     ) {}
 
 }
