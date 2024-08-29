@@ -6,22 +6,22 @@
 
         <div class="mb-3">
             <label
-                    for="search"
-                    class="form-label"
+                for="search"
+                class="form-label"
             >Поиск</label>
             <input
-                    wire:model.live="search"
-                    type="search"
-                    class="form-control"
-                    name="search"
-                    id="search"
-                    placeholder="Поиск..."
+                wire:model.live="search"
+                type="search"
+                class="form-control"
+                name="search"
+                id="search"
+                placeholder="Поиск..."
             >
         </div>
     </div>
 
     @if($advertisements->count())
-        <div class="row row-cols-1 row-cols-lg-3 mb-3 g-2">
+        <div class="row row-cols-1 row-cols-lg-4 mb-3 g-2">
             @foreach($advertisements as $advertisement)
                 <div class="col">
                     @include('livewire.page.advertisement.master.shared.card', [
