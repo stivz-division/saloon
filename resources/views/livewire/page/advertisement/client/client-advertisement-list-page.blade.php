@@ -6,16 +6,16 @@
 
         <div class="mb-3">
             <label
-                    for="search"
-                    class="form-label"
+                for="search"
+                class="form-label"
             >Поиск</label>
             <input
-                    wire:model.live="search"
-                    type="search"
-                    class="form-control"
-                    name="search"
-                    id="search"
-                    placeholder="Поиск..."
+                wire:model.live="search"
+                type="search"
+                class="form-control"
+                name="search"
+                id="search"
+                placeholder="Поиск..."
             >
         </div>
 
@@ -24,10 +24,10 @@
         @if(isset($facetDistribution['animal']))
 
             <livewire:page.advertisement.client.facet.animals
-                    @change-animals="selectAnimals($event.detail.selected)"
-                    :select-animals="$animals"
-                    wire:key="{{ uniqid('', true) }}"
-                    :animals="$facetDistribution['animal']"
+                @change-animals="selectAnimals($event.detail.selected)"
+                :select-animals="$animals"
+                wire:key="{{ uniqid('', true) }}"
+                :animals="$facetDistribution['animal']"
             />
 
             <hr>
@@ -38,10 +38,10 @@
         @if(isset($facetDistribution['breed_id']))
 
             <livewire:page.advertisement.client.facet.breeds
-                    @change-breeds="selectBreeds($event.detail.selected)"
-                    :select-breeds="$breeds"
-                    wire:key="{{ uniqid('', true) }}"
-                    :breeds="$facetDistribution['breed_id']"
+                @change-breeds="selectBreeds($event.detail.selected)"
+                :select-breeds="$breeds"
+                wire:key="{{ uniqid('', true) }}"
+                :breeds="$facetDistribution['breed_id']"
             />
 
             <hr>
@@ -51,10 +51,10 @@
         @if(isset($facetDistribution['yandex_location_id']))
             <div>
                 <livewire:page.advertisement.client.facet.client-advertisement-location
-                        @change-locations="selectLocations($event.detail.selected)"
-                        :select-locations="$locations"
-                        wire:key="{{ uniqid('', true) }}"
-                        :locations="$facetDistribution['yandex_location_id']"
+                    @change-locations="selectLocations($event.detail.selected)"
+                    :select-locations="$locations"
+                    wire:key="{{ uniqid('', true) }}"
+                    :locations="$facetDistribution['yandex_location_id']"
                 />
             </div>
 
@@ -63,13 +63,13 @@
 
         <div>
             <livewire:page.advertisement.client.facet.date-time-service
-                    @change-datetime-service-start="setDateTimeServiceStart($event.detail.datetime)"
-                    @change-datetime-service-end="setDateTimeServiceEnd($event.detail.datetime)"
-                    @change-without-datetime-service="setWithoutDateTimeService($event.detail.without)"
-                    :start="$dateTimeServiceStart"
-                    :end="$dateTimeServiceEnd"
-                    :without="$withoutDateTime"
-                    wire:key="{{ uniqid('', true) }}"
+                @change-datetime-service-start="setDateTimeServiceStart($event.detail.datetime)"
+                @change-datetime-service-end="setDateTimeServiceEnd($event.detail.datetime)"
+                @change-without-datetime-service="setWithoutDateTimeService($event.detail.without)"
+                :start="$dateTimeServiceStart"
+                :end="$dateTimeServiceEnd"
+                :without="$withoutDateTime"
+                wire:key="{{ uniqid('', true) }}"
             />
         </div>
 
@@ -78,6 +78,7 @@
 
     @if($advertisements->count())
         <h3>Всего объявлений: {{ $paginator->total() }}</h3>
+        <button class="btn btn-secondary mb-3" onclick="location.reload();">Сбросить фильтры</button>
         <div class="row row-cols-1 row-cols-lg-4 mb-3 g-2">
             @foreach($advertisements as $advertisement)
                 <div class="col">
@@ -90,8 +91,8 @@
 
                         <div class="text-end">
                             <a
-                                    class="btn btn-primary"
-                                    href="{{ route('client.advertisement.show', [
+                                class="btn btn-primary"
+                                href="{{ route('client.advertisement.show', [
                                 'advertisement' => $advertisement->uuid
                             ]) }}"
                             >Подробнее</a>
@@ -105,6 +106,7 @@
         {{ $paginator->links() }}
     @else
         <h2>Пока нет заявок</h2>
+        <button class="btn btn-secondary mb-3" onclick="location.reload();">Сбросить фильтры</button>
     @endif
 
 
