@@ -75,10 +75,12 @@
 
     </div>
 
+    @if($animals || $breeds || $locations || $dateTimeServiceStart || $dateTimeServiceEnd || $withoutDateTime)
+        <button class="btn btn-secondary mb-3" onclick="location.reload();">Сбросить фильтры</button>
+    @endif
 
     @if($advertisements->count())
         <h3>Всего объявлений: {{ $paginator->total() }}</h3>
-        <button class="btn btn-secondary mb-3" onclick="location.reload();">Сбросить фильтры</button>
         <div class="row row-cols-1 row-cols-lg-4 mb-3 g-2">
             @foreach($advertisements as $advertisement)
                 <div class="col">
@@ -106,7 +108,6 @@
         {{ $paginator->links() }}
     @else
         <h2>Пока нет заявок</h2>
-        <button class="btn btn-secondary mb-3" onclick="location.reload();">Сбросить фильтры</button>
     @endif
 
 
