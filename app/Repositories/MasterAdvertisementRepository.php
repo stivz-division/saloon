@@ -66,6 +66,68 @@ final class MasterAdvertisementRepository
     }
 
     /**
+     * @param  \App\Models\User  $user
+     * @param  int  $perPage
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserPublishedAdvertisementsPaginate(
+        User $user,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return MasterAdvertisement::query()
+            ->active()
+            ->where('user_id', $user->id)
+            ->with(['media', 'locations', 'advertisementTopTariff'])
+            ->paginate($perPage);
+    }
+
+    /**
+     * @param  \App\Models\User  $user
+     *
+     * @return int
+     */
+    public function getUserPublishedAdvertisementsCount(
+        User $user,
+    ): int {
+        return MasterAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->where('is_published', true)
+            ->count();
+    }
+
+    /**
+     * @param  \App\Models\User  $user
+     * @param  int  $perPage
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserArchivedAdvertisementsPaginate(
+        User $user,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return MasterAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->where('is_published', false)
+            ->with(['media', 'locations', 'advertisementTopTariff'])
+            ->paginate($perPage);
+    }
+
+    /**
+     * @param  \App\Models\User  $user
+     *
+     * @return int
+     */
+    public function getUserArchivedAdvertisementsCount(
+        User $user,
+    ): int {
+        return MasterAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->where('is_published', false)
+            ->count();
+    }
+
+    /**
      * @param  int  $id
      *
      * @return MasterAdvertisement|null

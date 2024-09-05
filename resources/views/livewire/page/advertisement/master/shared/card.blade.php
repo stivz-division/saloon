@@ -3,6 +3,11 @@
         <h4 class="my-0 fw-normal">
             {{ $advertisement->title }}
         </h4>
+        @if($advertisement->is_published)
+            <span class="text-muted small">
+                {{ $advertisement->created_at->toDateTimeString() }}
+            </span>
+        @endif
     </div>
     <div class="card-body">
         <h1 class="card-title pricing-card-title">
@@ -85,29 +90,56 @@
 
     </div>
     @if($control)
-        <div class="card-footer text-end">
-            <a
-                    href="{{ route('master.advertisement.edit', [
+        <div class="card-footer text-end row g-2">
+            <div class="col">
+                <a
+                        href="{{ route('master.advertisement.edit', [
                         'masterAdvertisement' => $advertisement->id
                     ]) }}"
-                    class="btn btn-primary me-2"
-            >
-                Редактировать
-            </a>
-            <button
-                    wire:click.prevent="deleteAdvertisement({{ $advertisement->id }})"
-                    wire:confirm="Вы уверены, что хотите удалить услугу?"
-                    class="btn btn-danger"
-            >
-                Удалить
-            </button>
+                        class="btn btn-primary w-100"
+                >
+                    Редактировать
+                </a>
+            </div>
+            <div class="col">
+                <button
+                        wire:click.prevent="deleteAdvertisement({{ $advertisement->id }})"
+                        wire:confirm="Вы уверены, что хотите удалить услугу?"
+                        class="btn btn-danger w-100"
+                >
+                    Удалить
+                </button>
+            </div>
+
+            @if($advertisement->is_published)
+                <div class="col">
+                    <button
+                            wire:click.prevent="archiveAdvertisement({{ $advertisement->id }})"
+                            wire:confirm="Вы уверены, что хотите отправить услугу в архив?"
+                            class="btn btn-dark w-100"
+                    >
+                        В архив
+                    </button>
+                </div>
+            @else
+                <div class="col">
+                    <button
+                            wire:click.prevent="publishAdvertisement({{ $advertisement->id }})"
+                            wire:confirm="Вы уверены, что хотите опубликовать услугу?"
+                            class="btn btn-dark w-100"
+                    >
+                        Опубликовать
+                    </button>
+                </div>
+            @endif
+
             @if($advertisement->advertisementTopTariff === null)
-                <div>
+                <div class="col">
                     <a
                             href="{{ route('master.advertisement.top', [
                         'masterAdvertisement' => $advertisement->id
                     ]) }}"
-                            class="btn btn-warning mt-2"
+                            class="btn btn-warning w-100"
                     >
                         Поднять в ТОП
                     </a>

@@ -7,15 +7,54 @@ namespace App\Services;
 use App\Domain\DTO\MasterAdvertisementStoreData;
 use App\Models\MasterAdvertisement;
 use App\Models\User;
+use App\Repositories\MasterAdvertisementRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class MasterAdvertisementService
 {
 
     public function __construct(
         public SubscriptionService $subscriptionService,
+        public MasterAdvertisementRepository $masterAdvertisementRepository,
     ) {}
+
+    public function archiveById(User $user, int $id): void
+    {
+        $advertisement = $this->masterAdvertisementRepository->getById($id);
+
+        if ($user->can('update', $advertisement) === false) {
+            throw new AccessDeniedHttpException();
+        }
+
+        if ($advertisement === null) {
+            throw new ModelNotFoundException();
+        }
+
+        $advertisement->update([
+            // Все у кого is_published = false считаются архивными!
+            'is_published' => false,
+        ]);
+    }
+
+    public function publishById(User $user, int $id): void
+    {
+        $advertisement = $this->masterAdvertisementRepository->getById($id);
+
+        if ($user->can('update', $advertisement) === false) {
+            throw new AccessDeniedHttpException();
+        }
+
+        if ($advertisement === null) {
+            throw new ModelNotFoundException();
+        }
+
+        $advertisement->update([
+            'is_published' => true,
+        ]);
+    }
 
     public function store(
         User $author,
