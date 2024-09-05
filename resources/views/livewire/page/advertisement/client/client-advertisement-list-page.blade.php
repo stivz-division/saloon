@@ -57,11 +57,25 @@
                         :locations="$facetDistribution['yandex_location_id']"
                 />
             </div>
+
+            <hr>
         @endif
+
+        <div>
+            <livewire:page.advertisement.client.facet.date-time-service
+                    @change-datetime-service-start="setDateTimeServiceStart($event.detail.datetime)"
+                    @change-datetime-service-end="setDateTimeServiceEnd($event.detail.datetime)"
+                    :start="$dateTimeServiceStart"
+                    :end="$dateTimeServiceEnd"
+                    wire:key="{{ uniqid('', true) }}"
+            />
+        </div>
 
     </div>
 
+
     @if($advertisements->count())
+        <h3>Всего объявлений: {{ $paginator->total() }}</h3>
         <div class="row row-cols-1 row-cols-lg-4 mb-3 g-2">
             @foreach($advertisements as $advertisement)
                 <div class="col">

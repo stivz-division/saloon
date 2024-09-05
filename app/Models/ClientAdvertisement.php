@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,6 +31,7 @@ class ClientAdvertisement extends Model
             'is_published',
             'animal',
             'breed_id',
+            'datetime_service_at',
         ];
 
     public const SORTABLE_ATTRIBUTES
@@ -79,7 +81,7 @@ class ClientAdvertisement extends Model
             'breed_id'            => $this->pet->breed_id,
             'yandex_location_id'  => $this->yandex_location_id,
             'description'         => $this->description,
-            'datetime_service_at' => $this->datetime_service_at,
+            'datetime_service_at' => Carbon::parse($this->datetime_service_at)->timestamp,
             'is_payment'          => $this->is_payment,
             'is_published'        => $this->is_published,
             'published_at'        => $this->published_at,

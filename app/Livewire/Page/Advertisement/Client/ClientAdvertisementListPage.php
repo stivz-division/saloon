@@ -4,6 +4,7 @@ namespace App\Livewire\Page\Advertisement\Client;
 
 use App\Domain\DTO\ClientAdvertisementFilterData;
 use App\Repositories\ClientAdvertisementRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,11 +22,29 @@ class ClientAdvertisementListPage extends Component
 
     public $breeds = [];
 
+    public $dateTimeServiceStart;
+
+    public $dateTimeServiceEnd;
+
     public function selectLocations($locations)
     {
         $this->setPage(1);
 
         $this->locations = $locations;
+    }
+
+    public function setDateTimeServiceStart($start)
+    {
+        $this->setPage(1);
+
+        $this->dateTimeServiceStart = $start;
+    }
+
+    public function setDateTimeServiceEnd($end)
+    {
+        $this->setPage(1);
+
+        $this->dateTimeServiceEnd = $end;
     }
 
     public function selectAnimals($animals)
@@ -53,7 +72,11 @@ class ClientAdvertisementListPage extends Component
             new ClientAdvertisementFilterData(
                 $this->locations,
                 $this->animals,
-                $this->breeds
+                $this->breeds,
+                $this->dateTimeServiceStart
+                    ? Carbon::parse($this->dateTimeServiceStart) : null,
+                $this->dateTimeServiceEnd
+                    ? Carbon::parse($this->dateTimeServiceEnd) : null
             ),
             4
         );
