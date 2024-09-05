@@ -81,7 +81,8 @@ class ClientAdvertisement extends Model
             'breed_id'            => $this->pet->breed_id,
             'yandex_location_id'  => $this->yandex_location_id,
             'description'         => $this->description,
-            'datetime_service_at' => Carbon::parse($this->datetime_service_at)->timestamp,
+            'datetime_service_at' => $this->datetime_service_at
+                ? Carbon::parse($this->datetime_service_at)->timestamp : null,
             'is_payment'          => $this->is_payment,
             'is_published'        => $this->is_published,
             'published_at'        => $this->published_at,

@@ -26,6 +26,8 @@ class ClientAdvertisementListPage extends Component
 
     public $dateTimeServiceEnd;
 
+    public $withoutDateTime = false;
+
     public function selectLocations($locations)
     {
         $this->setPage(1);
@@ -45,6 +47,13 @@ class ClientAdvertisementListPage extends Component
         $this->setPage(1);
 
         $this->dateTimeServiceEnd = $end;
+    }
+
+    public function setWithoutDateTimeService($without)
+    {
+        $this->setPage(1);
+
+        $this->withoutDateTime = $without;
     }
 
     public function selectAnimals($animals)
@@ -73,10 +82,11 @@ class ClientAdvertisementListPage extends Component
                 $this->locations,
                 $this->animals,
                 $this->breeds,
+                $this->withoutDateTime,
                 $this->dateTimeServiceStart
                     ? Carbon::parse($this->dateTimeServiceStart) : null,
                 $this->dateTimeServiceEnd
-                    ? Carbon::parse($this->dateTimeServiceEnd) : null
+                    ? Carbon::parse($this->dateTimeServiceEnd) : null,
             ),
             4
         );

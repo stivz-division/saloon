@@ -47,27 +47,31 @@ final class ClientAdvertisementRepository
                         .implode(',', $filterData->breeds).']';
                 }
 
-                if ($filterData->dateTimeServiceStart !== null
-                    && $filterData->dateTimeServiceEnd === null
-                ) {
-                    $options['filter'][] = 'datetime_service_at >= '
-                        .$filterData->dateTimeServiceStart->timestamp;
-                }
+                if ($filterData->withoutDateTime === false) {
+                    if ($filterData->dateTimeServiceStart !== null
+                        && $filterData->dateTimeServiceEnd === null
+                    ) {
+                        $options['filter'][] = 'datetime_service_at >= '
+                            .$filterData->dateTimeServiceStart->timestamp;
+                    }
 
-                if ($filterData->dateTimeServiceStart === null
-                    && $filterData->dateTimeServiceEnd !== null
-                ) {
-                    $options['filter'][] = 'datetime_service_at <= '
-                        .$filterData->dateTimeServiceEnd->timestamp;
-                }
+                    if ($filterData->dateTimeServiceStart === null
+                        && $filterData->dateTimeServiceEnd !== null
+                    ) {
+                        $options['filter'][] = 'datetime_service_at <= '
+                            .$filterData->dateTimeServiceEnd->timestamp;
+                    }
 
-                if ($filterData->dateTimeServiceStart !== null
-                    && $filterData->dateTimeServiceEnd !== null
-                ) {
-                    $options['filter'][] = 'datetime_service_at <= '
-                        .$filterData->dateTimeServiceEnd->timestamp
-                        .' AND datetime_service_at >= '
-                        .$filterData->dateTimeServiceStart->timestamp;
+                    if ($filterData->dateTimeServiceStart !== null
+                        && $filterData->dateTimeServiceEnd !== null
+                    ) {
+                        $options['filter'][] = 'datetime_service_at <= '
+                            .$filterData->dateTimeServiceEnd->timestamp
+                            .' AND datetime_service_at >= '
+                            .$filterData->dateTimeServiceStart->timestamp;
+                    }
+                } else {
+                    $options['filter'][] = 'datetime_service_at IS NULL';
                 }
 
                 return $meilisearch->search($query, $options);

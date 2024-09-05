@@ -11,6 +11,8 @@ class DateTimeService extends Component
 
     public $end;
 
+    public $without;
+
     public function updatedStart()
     {
         $this->dispatch('change-datetime-service-start',
@@ -21,6 +23,12 @@ class DateTimeService extends Component
     {
         $this->dispatch('change-datetime-service-end',
             datetime: $this->end);
+    }
+
+    public function updatedWithout()
+    {
+        $this->dispatch('change-without-datetime-service',
+            without: $this->without);
     }
 
     public function render()

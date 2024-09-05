@@ -65,8 +65,10 @@
             <livewire:page.advertisement.client.facet.date-time-service
                     @change-datetime-service-start="setDateTimeServiceStart($event.detail.datetime)"
                     @change-datetime-service-end="setDateTimeServiceEnd($event.detail.datetime)"
+                    @change-without-datetime-service="setWithoutDateTimeService($event.detail.without)"
                     :start="$dateTimeServiceStart"
                     :end="$dateTimeServiceEnd"
+                    :without="$withoutDateTime"
                     wire:key="{{ uniqid('', true) }}"
             />
         </div>
