@@ -66,11 +66,11 @@ class MasterAdvertisementEdit extends Component
         ) {
             return [
                 'value' => $location->id,
-                'name'  => $location->location,
+                'name' => $location->location,
             ];
         })->toArray();
 
-        $animalRepository    = app(AnimalRepository::class);
+        $animalRepository = app(AnimalRepository::class);
         $petWeightRepository = app(PetWeightRepository::class);
 
         $this->dogAnimal = $animalRepository->getWhere(AnimalType::Dog);
@@ -81,20 +81,22 @@ class MasterAdvertisementEdit extends Component
             ),
         );
 
-        $this->animals     = $animalRepository->all();
-        $this->petWeights  = $petWeightRepository->all();
-        $this->name        = $this->masterAdvertisement->title;
+        $this->animals = $animalRepository->all();
+        $this->petWeights = $petWeightRepository->all();
+        $this->name = $this->masterAdvertisement->title;
         $this->description = $this->masterAdvertisement->description;
         $this->start_at
-                           = $this->masterAdvertisement->start_at?->toDateString();
+            = $this->masterAdvertisement->start_at?->toDateString();
         $this->end_at
-                           = $this->masterAdvertisement->end_at?->toDateString();
-        $this->price       = $this->masterAdvertisement->price;
+            = $this->masterAdvertisement->end_at?->toDateString();
+        $this->price = $this->masterAdvertisement->price;
 
         // TODO: // переделать на массив
         $this->pet_weight = $this->masterAdvertisement->petWeights->first()->id;
-        $this->animal     = $this->masterAdvertisement->animals->first()->id;
-        $this->breed      = $this->masterAdvertisement->breeds->first()->id;
+        $this->animal = $this->masterAdvertisement->animals->first()->id;
+        if ($this->breed) {
+            $this->breed = $this->masterAdvertisement->breeds->first()->id;
+        }
     }
 
     public function updateAdvertisement()
