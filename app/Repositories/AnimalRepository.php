@@ -34,12 +34,15 @@ final class AnimalRepository
             ->first();
     }
 
-    public function search(?string $search): Collection
+    public function search(?string $search, ?int $limit = null): Collection
     {
         /** @var \Illuminate\Database\Eloquent\Collection $collection */
         $collection = Animal::query()
             ->when($search !== null, function (Builder $query) use ($search) {
-                $query->where('title', 'like', '%'.$search.'%');
+                $query->where('title_ru', 'like', '%'.$search.'%');
+            })
+            ->when($limit !== null, function (Builder $query) use ($limit) {
+                $query->limit($limit);
             })
             ->get();
 

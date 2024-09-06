@@ -27,7 +27,9 @@
 
         @include('livewire.page.advertisement.master.shared.phone')
 
-        
+        <x-alert.block/>
+
+
         <input
                 class="btn btn-primary"
                 type="submit"

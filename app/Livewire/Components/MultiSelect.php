@@ -25,6 +25,8 @@ class MultiSelect extends Component
 
     public $set = [];
 
+    public $data = [];
+
     public function mount()
     {
         $this->values   = collect();
@@ -47,7 +49,10 @@ class MultiSelect extends Component
         /** @var \App\Services\YandexLocationService $service */
         $service = app($this->service);
 
-        $this->values = $service->searchForMultiSelect($this->value);
+        $this->values = $service->searchForMultiSelect(
+            search: $this->value,
+            data: $this->data,
+        );
     }
 
     private function filterValues()

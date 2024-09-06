@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Livewire\Components\Hepler\MultiSelect\MultiSelectInterface;
 use App\Models\YandexLocation;
 use App\Repositories\YandexLocationRepository;
 use Illuminate\Support\Collection;
 
-final class YandexLocationService
+final class YandexLocationService implements MultiSelectInterface
 {
 
     public function __construct(
@@ -16,17 +17,17 @@ final class YandexLocationService
     ) {}
 
     public function searchForMultiSelect(
-        string $location,
-        int $limit = 5
+        ?string $search,
+        int $limit = 5,
+        array $data = []
     ): Collection {
-        $locations = $this->yandexLocationRepository->search($location, $limit);
-
-        return $locations->map(function (YandexLocation $location) {
-            return [
-                'value' => $location->id,
-                'name'  => $location->location,
-            ];
-        });
+        return $this->yandexLocationRepository->search($search, $limit)
+            ->map(function (YandexLocation $location) {
+                return [
+                    'value' => $location->id,
+                    'name'  => $location->location,
+                ];
+            });
     }
 
 }

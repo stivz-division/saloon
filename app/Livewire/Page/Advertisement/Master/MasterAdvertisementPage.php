@@ -4,10 +4,11 @@ namespace App\Livewire\Page\Advertisement\Master;
 
 use App\Domain\DTO\MasterAdvertisementStoreData;
 use App\Domain\Enum\AnimalType;
+use App\Livewire\Components\Hepler\MultiSelect\Animal;
+use App\Livewire\Components\Hepler\MultiSelect\Breed;
 use App\Livewire\Components\Hepler\MultiSelect\Location;
+use App\Livewire\Components\Hepler\MultiSelect\PetWeight;
 use App\Repositories\AnimalRepository;
-use App\Repositories\BreedRepository;
-use App\Repositories\PetWeightRepository;
 use App\Services\MasterAdvertisementService;
 use App\Services\SubscriptionService;
 use Livewire\Attributes\Validate;
@@ -18,9 +19,12 @@ class MasterAdvertisementPage extends Component
 {
 
     use Location;
+    use Animal;
+    use Breed;
+    use PetWeight;
     use WithFileUploads;
 
-    #[Validate(['photos.*' => 'image|max:1024'])]
+    #[Validate(['photos.*' => 'image|max:5024'])]
     public $photos = [];
 
     #[Validate('required|string')]
@@ -35,25 +39,10 @@ class MasterAdvertisementPage extends Component
     #[Validate('nullable|date_format:Y-m-d')]
     public $end_at;
 
-    #[Validate('required|exists:animals,id')]
-    public $animal;
-
-    #[Validate('required|exists:pet_weights,id')]
-    public $pet_weight;
-
-    #[Validate('nullable|exists:breeds,id')]
-    public $breed;
-
     #[Validate('required|numeric|min:1')]
     public $price;
 
     public $dogAnimal;
-
-    public $animals;
-
-    public $breeds;
-
-    public $petWeights;
 
     public function mount()
     {
@@ -68,8 +57,6 @@ class MasterAdvertisementPage extends Component
             $this->redirectRoute('subscription.list');
         }
 
-        $breedsRepository = app(BreedRepository::class);
-
         $this->locations = auth()->user()->workingLocations->map(function (
             $location
         ) {
@@ -79,24 +66,29 @@ class MasterAdvertisementPage extends Component
             ];
         })->toArray();
 
-        $animalRepository    = app(AnimalRepository::class);
-        $petWeightRepository = app(PetWeightRepository::class);
+        $animalRepository = app(AnimalRepository::class);
 
         $this->dogAnimal = $animalRepository->getWhere(AnimalType::Dog);
-
-        $this->breeds = $breedsRepository->allWhereAnimal(
-            $animalRepository->getWhere(
-                AnimalType::Dog
-            ),
-        );
-
-        $this->animals    = $animalRepository->all();
-        $this->petWeights = $petWeightRepository->all();
     }
 
     public function save()
     {
+        $this->addRulesFromOutside([
+            'animals'         => 'required|array|min:1',
+            'animals.*.value' => 'exists:animals,id',
+
+            'petWeights'         => 'required|array|min:1',
+            'petWeights.*.value' => 'exists:pet_weights,id',
+
+            'breeds'         => 'nullable|array|min:0',
+            'breeds.*.value' => 'exists:breeds,id',
+        ]);
+
         $this->validate();
+
+        $animals    = collect($this->animals)->pluck('value')->toArray();
+        $petWeights = collect($this->petWeights)->pluck('value')->toArray();
+        $breeds     = collect($this->breeds)->pluck('value')->toArray();
 
         app(MasterAdvertisementService::class)
             ->store(
@@ -104,16 +96,14 @@ class MasterAdvertisementPage extends Component
                 new MasterAdvertisementStoreData(
                     $this->name,
                     $this->description,
-                    $this->animal ? [$this->animal] : [],
-                    // TODO: Получать массив
-                    $this->pet_weight ? [$this->pet_weight] : [],
-                    // TODO: Получать массив
-                    $this->breed ? [$this->breed] : [], // TODO: Получать массив
+                    $animals,
+                    $petWeights,
+                    $breeds,
                     $this->price,
                     $this->start_at,
                     $this->end_at,
                     $this->locations,
-                    $this->photos,
+                    $this->photos
                 )
             );
 

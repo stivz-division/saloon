@@ -12,6 +12,7 @@ class Animal extends Model
     protected $fillable
         = [
             'title',
+            'title_ru',
         ];
 
     protected $casts

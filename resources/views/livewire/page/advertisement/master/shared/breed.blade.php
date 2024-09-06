@@ -1,24 +1,17 @@
-@if($animal && (int) $animal === $dogAnimal->id)
-    <div class="mb-3">
-        <label
-                for="breed"
-                class="form-label"
-        >Порода</label>
-        <select
-                wire:model="breed"
-                id="breed"
-                class="form-select"
-                aria-label="Выберите породу"
-                required
-        >
-            <option
-                    selected
-                    value=""
-            >Выберите породу
-            </option>
-            @foreach($breeds as $item)
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-            @endforeach
-        </select>
+@if(collect($animals)->pluck('value')->contains($dogAnimal->id))
+    <div class="mb-3 card-body card">
+
+        <h3
+        >Порода</h3>
+
+        <livewire:components.multi-select
+                :service="$serviceBreed"
+                @change-selected="setBreeds($event.detail.selected)"
+                :set="$breeds"
+                :data="['animal_id' => $dogAnimal->id]"
+                placeholder="Укажите породу"
+        />
+
+        <span class="text-muted small">Например: овчарка</span>
     </div>
 @endif

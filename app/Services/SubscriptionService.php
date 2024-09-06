@@ -65,4 +65,14 @@ final class SubscriptionService
         ]);
     }
 
+    /** Отписываем пользователя */
+    public function unsubscribe(User $user): void
+    {
+        $user->update([
+            'subscription_id'       => null,
+            'subscription_start_at' => null,
+            'subscription_end_at'   => null,
+        ]);
+    }
+
 }
