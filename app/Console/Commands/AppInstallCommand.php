@@ -53,7 +53,7 @@ class AppInstallCommand extends Command
      */
     public function handle()
     {
-        $countActions = 10;
+        $countActions = count($this->commands);
 
         $bar = $this->output->createProgressBar($countActions);
 
