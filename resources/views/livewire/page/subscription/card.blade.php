@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
         <h1 class="card-title pricing-card-title">
-            {{$item->price}}₽<small class="text-body-secondary fw-light">/месяц</small>
+            {{$item->price}}₽<small class="text-body-secondary fw-light"></small>
         </h1>
         <ul class="list-unstyled mt-3 mb-4">
             <li>Объявлений: {{ $item->advertisement_count }} шт.</li>
@@ -16,9 +16,9 @@
         </ul>
         @if($buy)
             <button
-                    wire:click="subscribe({{ $item->id }})"
-                    type="button"
-                    class="w-100 btn btn-lg btn-primary"
+                wire:click="subscribe({{ $item->id }})"
+                type="button"
+                class="w-100 btn btn-lg btn-primary"
             >
                 Оформить
             </button>
