@@ -14,7 +14,9 @@
 
             @include('livewire.page.advertisement.master.shared.pet-weight')
 
-            @include('livewire.page.advertisement.master.shared.breed')
+            @if(collect($animals)->pluck('value')->contains($dogAnimal->id))
+                @include('livewire.page.advertisement.master.shared.breed')
+            @endif
 
             @include('livewire.page.advertisement.master.shared.price')
 

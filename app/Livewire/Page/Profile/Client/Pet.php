@@ -3,6 +3,7 @@
 namespace App\Livewire\Page\Profile\Client;
 
 use App\Domain\Enum\AnimalType;
+use App\Livewire\Components\Hepler\MultiSelect\Breed;
 use App\Repositories\AnimalRepository;
 use App\Repositories\BreedRepository;
 use App\Repositories\PetWeightRepository;
@@ -14,6 +15,7 @@ class Pet extends Component
 {
 
     use WithFileUploads;
+    use Breed;
 
     /** @var \App\Models\User */
     public $user;
@@ -22,13 +24,9 @@ class Pet extends Component
 
     public $animal;
 
-    public $breed;
-
     public $file;
 
     public $pet_weight;
-
-    public $breeds;
 
     public $petWeights;
 
@@ -42,13 +40,14 @@ class Pet extends Component
     public function rules()
     {
         return [
-            'nickname'   => ['required', 'string', 'max:255'],
-            'animal'     => ['required', 'exists:animals,id'],
-            'breed'      => ['nullable', 'exists:breeds,id'],
-            'file'       => [
+            'nickname'       => ['required', 'string', 'max:255'],
+            'animal'         => ['required', 'exists:animals,id'],
+            'breeds'         => 'nullable|array|min:0|max:1',
+            'breeds.*.value' => 'exists:breeds,id',
+            'file'           => [
                 'nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:15048',
             ],
-            'pet_weight' => ['required', 'exists:pet_weights,id'],
+            'pet_weight'     => ['required', 'exists:pet_weights,id'],
         ];
     }
 
@@ -70,7 +69,7 @@ class Pet extends Component
             $this->nickname,
             $animal,
             $animal->title->value === AnimalType::Dog->value
-                ? $breedsRepository->getById($this->breed) : null,
+                ? $breedsRepository->getById($this->breeds[0]['value']) : null,
             $petWeightRepository->getById($this->pet_weight),
             $file
         );
@@ -79,7 +78,7 @@ class Pet extends Component
 
         $this->nickname   = null;
         $this->animal     = null;
-        $this->breed      = null;
+        $this->breeds     = [];
         $this->file       = null;
         $this->pet_weight = null;
 
@@ -103,17 +102,11 @@ class Pet extends Component
     {
         $petWeightRepository = app(PetWeightRepository::class);
         $animalRepository    = app(AnimalRepository::class);
-        $breedsRepository    = app(BreedRepository::class);
 
         $this->dogAnimal = $animalRepository->getWhere(AnimalType::Dog);
 
         $this->petWeights = $petWeightRepository->all();
         $this->animals    = $animalRepository->all();
-        $this->breeds     = $breedsRepository->allWhereAnimal(
-            $animalRepository->getWhere(
-                AnimalType::Dog
-            ),
-        );
 
         $this->pets = $this->user->pets;
     }

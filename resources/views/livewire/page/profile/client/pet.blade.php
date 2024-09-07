@@ -28,47 +28,86 @@
         <h2>Добавить питомца</h2>
         <form wire:submit.prevent="savePet">
             <div class="mb-3">
-                <label for="nickname" class="form-label">Кличка</label>
-                <input wire:model="nickname" type="text" class="form-control"
-                       id="nickname"
-                       placeholder="Кличка" required>
+                <label
+                        for="nickname"
+                        class="form-label"
+                >Кличка</label>
+                <input
+                        wire:model="nickname"
+                        type="text"
+                        class="form-control"
+                        id="nickname"
+                        placeholder="Кличка"
+                        required
+                >
             </div>
             <div class="mb-3">
-                <label for="file" class="form-label">Вы можете загрузить фото или видео</label>
-                <input wire:model="file" class="form-control" accept="image/*" name="file" type="file" id="file">
+                <label
+                        for="file"
+                        class="form-label"
+                >Вы можете загрузить фото или видео</label>
+                <input
+                        wire:model="file"
+                        class="form-control"
+                        accept="image/*"
+                        name="file"
+                        type="file"
+                        id="file"
+                >
             </div>
             <div class="mb-3">
-                <label for="animal" class="form-label">Категория</label>
-                <select wire:model.live="animal" id="animal" class="form-select" aria-label="Выберите категорию"
-                        required>
-                    <option selected value="">Выберите категорию</option>
+                <label
+                        for="animal"
+                        class="form-label"
+                >Категория</label>
+                <select
+                        wire:model.live="animal"
+                        id="animal"
+                        class="form-select"
+                        aria-label="Выберите категорию"
+                        required
+                >
+                    <option
+                            selected
+                            value=""
+                    >Выберите категорию
+                    </option>
                     @foreach($animals as $item)
                         <option value="{{ $item->id }}">{{ $item->title->name() }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-3">
-                <label for="pet_weight" class="form-label">Вес</label>
-                <select wire:model="pet_weight" id="pet_weight" class="form-select" aria-label="Выберите вес" required>
-                    <option selected value="">Выберите вес</option>
+                <label
+                        for="pet_weight"
+                        class="form-label"
+                >Вес</label>
+                <select
+                        wire:model="pet_weight"
+                        id="pet_weight"
+                        class="form-select"
+                        aria-label="Выберите вес"
+                        required
+                >
+                    <option
+                            selected
+                            value=""
+                    >Выберите вес
+                    </option>
                     @foreach($petWeights as $petWeight)
                         <option value="{{ $petWeight->id }}">{{ $petWeight->title->name() }}</option>
                     @endforeach
                 </select>
             </div>
             @if($animal && (int) $animal === $dogAnimal->id)
-                <div class="mb-3">
-                    <label for="breed" class="form-label">Порода</label>
-                    <select wire:model="breed" id="breed" class="form-select" aria-label="Выберите породу" required>
-                        <option selected value="">Выберите породу</option>
-                        @foreach($breeds as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @include('livewire.page.advertisement.master.shared.breed', ['max' => 1])
             @endif
 
-            <input class="btn btn-primary" type="submit" value="Добавить">
+            <input
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Добавить"
+            >
 
         </form>
     </div>
