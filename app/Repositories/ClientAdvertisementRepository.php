@@ -32,6 +32,8 @@ final class ClientAdvertisementRepository
                 $options['facets']   = ClientAdvertisement::FACETS;
                 $options['filter'][] = 'is_published = true';
 
+                $options['sort'] = ['published_at:desc'];
+
                 if (count($filterData->locations)) {
                     $options['filter'][] = 'yandex_location_id IN ['
                         .implode(',', $filterData->locations).']';
@@ -108,7 +110,7 @@ final class ClientAdvertisementRepository
     {
         return ClientAdvertisement::query()
             ->whereIn('id', $ids)
-            ->latest()
+            ->latest('published_at')
             ->get();
     }
 

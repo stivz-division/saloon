@@ -6,10 +6,16 @@
     <div class="badge rounded-pill text-bg-success mb-3">ПУБЛИКУЕТСЯ</div>
 @endif
 
-<div class="p-3 rounded-4 bg-light mb-3">
-    <h4 class="mb-0" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+<div class="p-3 rounded-4 bg-light mt-1">
+    <h4
+            class="mb-0"
+            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+    >
         {{ $advertisement->description }}
     </h4>
+    <div class="mb-3 small text-muted">
+        {{ $advertisement->published_at->toDateTimeString() }}
+    </div>
 </div>
 
 @if($contacts)
