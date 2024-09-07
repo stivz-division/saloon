@@ -23,12 +23,28 @@ class Contacts extends Component
     #[Validate('nullable|string|min:12|max:12|regex:/^\+7\d{3}\d{3}\d{2}\d{2}$/i')]
     public $whatsapp;
 
+    public $isEdit = false;
+
     public function mount()
     {
         $this->phone     = $this->user->phone;
         $this->dop_phone = $this->user->dop_phone;
         $this->telegram  = $this->user->telegram;
         $this->whatsapp  = $this->user->whatsapp;
+
+        $this->isEdit = collect([
+                $this->user->phone,
+                $this->user->dop_phone,
+                $this->user->telegram,
+                $this->user->whatsapp,
+            ])->contains(function ($value) {
+                return empty($value) === false;
+            }) === false;
+    }
+
+    public function showEdit()
+    {
+        $this->isEdit = true;
     }
 
     public function saveContacts()
@@ -45,6 +61,8 @@ class Contacts extends Component
         $this->user->refresh();
 
         session()->flash('success', 'Данные сохранены.');
+
+        $this->isEdit = false;
 
         $this->mount();
     }
