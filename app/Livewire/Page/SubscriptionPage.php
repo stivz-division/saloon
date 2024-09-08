@@ -33,7 +33,7 @@ class SubscriptionPage extends Component
         $response = $client->createPayment(
             [
                 'amount'       => [
-                    'value'    => $subscription->price,
+                    'value'    => $subscription->getFinalPrice(),
                     'currency' => CurrencyCode::RUB,
                 ],
                 'confirmation' => [

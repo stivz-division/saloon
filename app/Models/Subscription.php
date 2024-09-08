@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Subscription extends Model
 {
@@ -21,5 +22,21 @@ class Subscription extends Model
             'price'  => 'float',
             'status' => 'boolean',
         ];
+
+    public function stock(): HasOne
+    {
+        return $this->hasOne(Stock::class);
+    }
+
+    public function getFinalPrice()
+    {
+        $price = $this->price;
+
+        if ($this->stock !== null && $this->stock->start_at->isPast()) {
+            $price = $this->stock->price;
+        }
+
+        return $price;
+    }
 
 }
