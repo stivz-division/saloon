@@ -42,7 +42,7 @@
     <div class="p-3 rounded-4 bg-light mb-3">
         <h6>Желаемая дата оказания услуги</h6>
 
-        {{ $advertisement->datetime_service_at->toDateTimeString() }}
+        {{ $advertisement->datetime_service_at->format('d.m.Y H') }}
 
         @if($advertisement->datetime_service_at->isPast() === false)
             <span class="badge rounded-pill text-bg-success">ЕЩЕ МОЖНО УСПЕТЬ</span>

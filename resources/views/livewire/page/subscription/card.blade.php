@@ -40,7 +40,7 @@
         </h1>
         @if($item->stock !== null)
             <div class="text-muted small text-decoration-underline">
-                Действует до: {{ $item->stock->end_at->toDateTimeString() }}
+                Действует до: {{ $item->stock->end_at->format('d.m.Y H:i') }}
             </div>
         @endif
         <ul class="list-unstyled mt-3 mb-4">

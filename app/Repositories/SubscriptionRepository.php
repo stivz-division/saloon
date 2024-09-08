@@ -17,6 +17,7 @@ final class SubscriptionRepository
             ->with([
                 'stock' => function (HasOne $query) {
                     $query->where('start_at', '<=', now());
+                    $query->where('end_at', '>', now());
                 },
             ])
             ->where('status', true)

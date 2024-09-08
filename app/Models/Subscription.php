@@ -32,7 +32,9 @@ class Subscription extends Model
     {
         $price = $this->price;
 
-        if ($this->stock !== null && $this->stock->start_at->isPast()) {
+        if ($this->stock !== null && $this->stock->start_at->isPast()
+            && $this->stock->end_at->isFuture()
+        ) {
             $price = $this->stock->price;
         }
 
