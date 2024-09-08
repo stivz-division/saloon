@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Domain\DTO\ClientAdvertisementFilterData;
 use App\Models\ClientAdvertisement;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,6 +14,66 @@ use Meilisearch\Endpoints\Indexes;
 
 final class ClientAdvertisementRepository
 {
+
+    /**
+     * @param  \App\Models\User  $user
+     *
+     * @return int
+     */
+    public function getUserArchivedAdvertisementsCount(
+        User $user,
+    ): int {
+        return ClientAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->where('is_published', false)
+            ->count();
+    }
+
+    /**
+     * @param  \App\Models\User  $user
+     * @param  int  $perPage
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserArchivedAdvertisementsPaginate(
+        User $user,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return ClientAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->where('is_published', false)
+            ->paginate($perPage);
+    }
+
+    /**
+     * @param  \App\Models\User  $user
+     * @param  int  $perPage
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserPublishedAdvertisementsPaginate(
+        User $user,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return ClientAdvertisement::query()
+            ->where('is_published', true)
+            ->where('user_id', $user->id)
+            ->paginate($perPage);
+    }
+
+    /**
+     * @param  \App\Models\User  $user
+     *
+     * @return int
+     */
+    public function getUserPublishedAdvertisementsCount(
+        User $user,
+    ): int {
+        return ClientAdvertisement::query()
+            ->where('user_id', $user->id)
+            ->where('is_published', true)
+            ->count();
+    }
 
     /**
      * @param  string  $search

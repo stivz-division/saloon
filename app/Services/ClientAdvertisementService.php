@@ -6,8 +6,11 @@ namespace App\Services;
 
 use App\Domain\DTO\ClientAdvertisementStoreData;
 use App\Models\ClientAdvertisement;
+use App\Models\User;
 use App\Repositories\ClientAdvertisementRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class ClientAdvertisementService
 {
@@ -16,6 +19,41 @@ final class ClientAdvertisementService
         private ClientAdvertisementRepository $clientAdvertisementRepository,
         private UserRepository $userRepository
     ) {}
+
+    public function archiveById(User $user, int $id): void
+    {
+        $advertisement = $this->clientAdvertisementRepository->getById($id);
+
+        if ($user->can('update', $advertisement) === false) {
+            throw new AccessDeniedHttpException();
+        }
+
+        if ($advertisement === null) {
+            throw new ModelNotFoundException();
+        }
+
+        $advertisement->update([
+            // Все у кого is_published = false считаются архивными!
+            'is_published' => false,
+        ]);
+    }
+
+    public function publishById(User $user, int $id): void
+    {
+        $advertisement = $this->clientAdvertisementRepository->getById($id);
+
+        if ($user->can('update', $advertisement) === false) {
+            throw new AccessDeniedHttpException();
+        }
+
+        if ($advertisement === null) {
+            throw new ModelNotFoundException();
+        }
+
+        $advertisement->update([
+            'is_published' => true,
+        ]);
+    }
 
     public function payment(int $id)
     {

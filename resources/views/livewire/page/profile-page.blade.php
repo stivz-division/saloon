@@ -10,6 +10,12 @@
         </div>
     @endif
 
+    @if($user->isClient())
+        <div class="mb-3">
+            <livewire:page.profile.client.my-advertisements :user="$user"/>
+        </div>
+    @endif
+
     <div class="mb-3">
         <livewire:page.profile.avatar :user="$user"/>
     </div>

@@ -4,6 +4,7 @@ namespace App\Livewire\Page\Advertisement\Client;
 
 use App\Domain\DTO\ClientAdvertisementStoreData;
 use App\Livewire\Components\Hepler\MultiSelect\Location;
+use App\Repositories\ClientAdvertisementRepository;
 use App\Repositories\PetRepository;
 use App\Rules\Client\ClientAdvertisementDateTimeRule;
 use App\Services\ClientAdvertisementService;
@@ -32,6 +33,26 @@ class ClientAdvertisementPage extends Component
     {
         $this->user     = auth()->user();
         $this->userPets = $this->user->pets;
+
+        $link = request()->get('link');
+
+        if ($link !== null) {
+            $clientAdvertisement
+                = app(ClientAdvertisementRepository::class)->getById($link);
+
+            $this->pet         = $clientAdvertisement->pet_id;
+            $this->description = $clientAdvertisement->description;
+
+            $this->locations = [
+                [
+                    'value' => $clientAdvertisement->yandexLocation->id,
+                    'name'  => $clientAdvertisement->yandexLocation->location,
+                ],
+            ];
+
+            $this->datetime
+                = $clientAdvertisement->datetime_service_at?->toDateTimeString();
+        }
     }
 
     public function rules()
