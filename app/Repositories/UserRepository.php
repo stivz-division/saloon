@@ -24,6 +24,7 @@ final class UserRepository
     {
         return User::query()
             ->with('infoMaster')
+            ->withCount(['masterAdvertisements'])
             ->where('account_type', AccountType::Master)
             ->latest()
             ->paginate(15);

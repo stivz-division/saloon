@@ -5,6 +5,7 @@ namespace App\Livewire\Page\Advertisement\Master;
 use App\Domain\DTO\MasterAdvertisementFilterData;
 use App\Livewire\Components\Hepler\MultiSelect\Location;
 use App\Repositories\MasterAdvertisementRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,9 +14,21 @@ class MasterAdvertisementListPage extends Component
 {
 
     use WithPagination;
+
     use Location;
 
     public $search = '';
+
+    public $master;
+
+    public function mount()
+    {
+        if (request()->has('master')) {
+            $this->master = app(UserRepository::class)->getUserByUuid(
+                request()->get('master')
+            );
+        }
+    }
 
     public function selectLocations($locations)
     {
@@ -35,7 +48,8 @@ class MasterAdvertisementListPage extends Component
             new MasterAdvertisementFilterData(
                 $this->locations,
             ),
-            4
+            masterId: $this->master?->id,
+            perPage: 4
         );
 
         $facetDistribution = $advertisementsRaw->items()['facetDistribution'];

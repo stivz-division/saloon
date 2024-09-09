@@ -6,16 +6,16 @@
 
         <div class="mb-3">
             <label
-                for="search"
-                class="form-label"
+                    for="search"
+                    class="form-label"
             >Поиск</label>
             <input
-                wire:model.live="search"
-                type="search"
-                class="form-control"
-                name="search"
-                id="search"
-                placeholder="Поиск..."
+                    wire:model.live="search"
+                    type="search"
+                    class="form-control"
+                    name="search"
+                    id="search"
+                    placeholder="Поиск..."
             >
         </div>
     </div>
@@ -31,7 +31,7 @@
             @endforeach
         </div>
 
-        {{ $paginator->links() }}
+        {{ $paginator->appends(['master' => request()->get('master')])->links() }}
 
     @else
         <h2>Пока нет услуг</h2>

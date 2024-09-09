@@ -25,14 +25,20 @@ final class MasterAdvertisementRepository
     public function searchAdvertisementsForCatalog(
         string $search,
         MasterAdvertisementFilterData $filterData,
+        int $masterId = null,
         int $perPage = 15
     ): LengthAwarePaginator {
         return MasterAdvertisement::search($search,
             function (Indexes $meilisearch, string $query, array $options) use (
+                $masterId,
                 $filterData
             ) {
                 $options['facets']   = MasterAdvertisement::FACETS;
                 $options['filter'][] = 'is_published = true';
+
+                if ($masterId !== null) {
+                    $options['filter'][] = 'user_id = '.$masterId;
+                }
 
                 $options['sort'] = ['top_at:desc'];
 

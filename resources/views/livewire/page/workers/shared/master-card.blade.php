@@ -11,6 +11,15 @@
     @endif
 
     <div class="card-body">
+        <div class="small text-muted mb-2 d-flex justify-content-between align-items-center">
+            Объявлений: {{ $master->master_advertisements_count }}
+            <a
+                    class="btn btn-primary btn-sm"
+                    href="{{ route('master.advertisement.list', ['master' => $master->uuid]) }}"
+            >
+                Посмотреть
+            </a>
+        </div>
         <h5 class="card-title">
             {{ $master->surname }} {{ $master->name }}
         </h5>
