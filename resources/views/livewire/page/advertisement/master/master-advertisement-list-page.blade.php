@@ -18,6 +18,55 @@
                     placeholder="Поиск..."
             >
         </div>
+
+        <hr>
+
+        @if(isset($facetDistribution['animals']))
+
+            <livewire:page.advertisement.client.facet.animals
+                    @change-animals="selectAnimals($event.detail.selected)"
+                    :select-animals="$facetAnimals"
+                    wire:key="{{ uniqid('', true) }}"
+                    :animals="$facetDistribution['animals']"
+            />
+
+            <hr>
+
+        @endif
+
+        @if(isset($facetDistribution['breeds']))
+
+            <livewire:page.advertisement.master.facet.breeds
+                    @change-breeds="selectBreeds($event.detail.selected)"
+                    :select-breeds="$facetBreeds"
+                    wire:key="{{ uniqid('', true) }}"
+                    :breeds="$facetDistribution['breeds']"
+            />
+
+            <hr>
+
+        @endif
+
+        @if(isset($facetDistribution['locations']))
+            <div>
+                <livewire:page.advertisement.master.facet.locations
+                        @change-locations="selectLocations($event.detail.selected)"
+                        :select-locations="$facetLocations"
+                        wire:key="{{ uniqid('', true) }}"
+                        :locations="$facetDistribution['locations']"
+                />
+            </div>
+
+            <hr>
+        @endif
+
+        <livewire:page.advertisement.master.facet.date-time-service
+                @change-datetime-service-start="setDateTimeServiceStart($event.detail.datetime)"
+                @change-datetime-service-end="setDateTimeServiceEnd($event.detail.datetime)"
+                :start="$dateTimeServiceStart"
+                :end="$dateTimeServiceEnd"
+                wire:key="{{ uniqid('', true) }}"
+        />
     </div>
 
     @if($advertisements->count())

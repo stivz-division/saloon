@@ -35,6 +35,8 @@ class MasterAdvertisement extends Model implements HasMedia
             'breeds',
             'locations',
             'pet_weights',
+            'start_at',
+            'end_at',
         ];
 
     public const SORTABLE_ATTRIBUTES
@@ -85,8 +87,8 @@ class MasterAdvertisement extends Model implements HasMedia
             'id'               => $this->id,
             'user_id'          => $this->user_id,
             'title'            => $this->title,
-            'start_at'         => $this->start_at,
-            'end_at'           => $this->end_at,
+            'start_at'         => $this->start_at?->timestamp,
+            'end_at'           => $this->end_at?->timestamp,
             'published_at'     => $this->published_at,
             'end_published_at' => $this->end_published_at,
             'created_at'       => $this->created_at,

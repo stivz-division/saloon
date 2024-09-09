@@ -40,11 +40,44 @@ final class MasterAdvertisementRepository
                     $options['filter'][] = 'user_id = '.$masterId;
                 }
 
+                if (count($filterData->animals)) {
+                    $options['filter'][] = 'animals IN ['
+                        .implode(',', $filterData->animals).']';
+                }
+
+                if (count($filterData->breeds)) {
+                    $options['filter'][] = 'breeds IN ['
+                        .implode(',', $filterData->breeds).']';
+                }
+
                 $options['sort'] = ['top_at:desc'];
 
                 if (count($filterData->locations)) {
                     $options['filter'][] = 'locations IN ['
                         .implode(',', $filterData->locations).']';
+                }
+
+                if ($filterData->dateTimeServiceStart !== null
+                    && $filterData->dateTimeServiceEnd === null
+                ) {
+                    $options['filter'][] = 'start_at >= '
+                        .$filterData->dateTimeServiceStart->timestamp;
+                }
+
+                if ($filterData->dateTimeServiceStart === null
+                    && $filterData->dateTimeServiceEnd !== null
+                ) {
+                    $options['filter'][] = 'end_at <= '
+                        .$filterData->dateTimeServiceEnd->timestamp;
+                }
+
+                if ($filterData->dateTimeServiceStart !== null
+                    && $filterData->dateTimeServiceEnd !== null
+                ) {
+                    $options['filter'][] = 'end_at <= '
+                        .$filterData->dateTimeServiceEnd->timestamp
+                        .' AND start_at >= '
+                        .$filterData->dateTimeServiceStart->timestamp;
                 }
 
                 return $meilisearch->search($query, $options);

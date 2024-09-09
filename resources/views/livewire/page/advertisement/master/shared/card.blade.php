@@ -8,6 +8,15 @@
                 {{ $advertisement->created_at->toDateTimeString() }}
             </span>
         @endif
+        @if($advertisement->start_at && $advertisement->end_at)
+            <hr>
+
+            <div class="small text-muted">
+                Период услуги:<br/> {{ $advertisement->start_at->toDateString() }}
+                -{{$advertisement->end_at->toDateString()}}
+            </div>
+        @endif
+
     </div>
     <div class="card-body">
         <h1 class="card-title pricing-card-title">
