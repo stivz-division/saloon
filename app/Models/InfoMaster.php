@@ -37,4 +37,12 @@ class InfoMaster extends Model implements HasMedia
             'subscription_end_at' => 'datetime',
         ];
 
+    public function canDopService(): bool
+    {
+        return $this->is_veterinarian
+            || $this->is_delivering_pet
+            || $this->is_home_check_out
+            || $this->is_at_home;
+    }
+
 }

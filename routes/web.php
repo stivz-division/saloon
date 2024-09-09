@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Page\WelcomePage;
+use App\Livewire\Page\Workers\WorkersPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', WelcomePage::class)
     ->name('welcome');
+
+Route::get('workers', WorkersPage::class)
+    ->name('workers');
 

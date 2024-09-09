@@ -44,6 +44,10 @@
                     </li>
 
                     <li class="nav-item">
+                        <x-header.item route="workers">Мастера и Салоны</x-header.item>
+                    </li>
+
+                    <li class="nav-item">
                         <x-header.item route="profile">Профиль</x-header.item>
                     </li>
 
