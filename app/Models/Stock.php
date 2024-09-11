@@ -23,12 +23,12 @@ class Stock extends Model
 
     protected $casts
         = [
-            'type'      => StockType::class,
+            'type' => StockType::class,
             'is_active' => 'boolean',
-            'start_at'  => 'datetime',
-            'end_at'    => 'datetime',
-            'price'     => 'float',
-            'percent'   => 'integer',
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
+            'price' => 'float',
+            'percent' => 'integer',
         ];
 
     protected static function boot()
@@ -41,7 +41,7 @@ class Stock extends Model
             if ($model->type === StockType::Price) {
                 $price = $model->price;
 
-                $model->percent = round(($productPrice * $price) / 100);
+                $model->percent = round((($productPrice - $price) / $productPrice) * 100);
             }
 
             if ($model->type === StockType::Percent) {
