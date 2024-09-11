@@ -49,6 +49,24 @@ class Stock extends Model
 
                 $model->price = $productPrice - $discount;
             }
+
+        });
+
+        self::updating(function ($model) {
+            $productPrice = $model->subscription->price;
+
+            if ($model->type === StockType::Price) {
+                $price = $model->price;
+
+                $model->percent = round((($productPrice - $price) / $productPrice) * 100);
+            }
+
+            if ($model->type === StockType::Percent) {
+                $discount = $productPrice * ($model->percent / 100);
+
+                $model->price = $productPrice - $discount;
+            }
+
         });
     }
 
