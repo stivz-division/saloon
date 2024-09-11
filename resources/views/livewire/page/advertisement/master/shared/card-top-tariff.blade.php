@@ -6,7 +6,12 @@
     </div>
     <div class="card-body">
         <h1 class="card-title pricing-card-title">
-            {{$item->price}}₽<small class="text-body-secondary fw-light">/{{$item->count_days}} дней</small>
+            @if(floor($item->price) != $item->price)
+                {{ number_format($item->price, 2, ',', ' ') }}₽
+            @else
+                {{ number_format($item->price, 0, ',', ' ') }}₽
+            @endif
+            <small class="text-body-secondary fw-light">/{{$item->count_days}} дней</small>
         </h1>
         <ul class="list-unstyled mt-3 mb-4">
             @if($item->type === \App\Domain\Enum\AdvertisementTopTariffsType::Minute)
@@ -18,9 +23,9 @@
         </ul>
         @if($buy)
             <button
-                    wire:click="raiseTop({{ $item->id }})"
-                    type="button"
-                    class="w-100 btn btn-lg btn-primary"
+                wire:click="raiseTop({{ $item->id }})"
+                type="button"
+                class="w-100 btn btn-lg btn-primary"
             >
                 Поднять в топ
             </button>
