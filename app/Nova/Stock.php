@@ -46,7 +46,7 @@ class Stock extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      *
      * @return array
      */
@@ -59,7 +59,7 @@ class Stock extends Resource
 
             Select::make('Тип', 'type')->options([
                 StockType::Percent->value => StockType::Percent->name(),
-                StockType::Price->value   => StockType::Price->name(),
+                StockType::Price->value => StockType::Price->name(),
             ])
                 ->rules('required')
                 ->required(),
@@ -71,9 +71,9 @@ class Stock extends Resource
                 ->step(1)
                 ->hide()
                 ->dependsOn('type', function (
-                    Number $field,
+                    Number      $field,
                     NovaRequest $request,
-                    FormData $formData
+                    FormData    $formData
                 ) {
                     if ($formData->get('type')
                         === StockType::Percent->value
@@ -86,11 +86,11 @@ class Stock extends Resource
 
             Number::make('Цена со скидкой', 'price')
                 ->hide()
-                ->step(0.1)
+                ->step(0.01)
                 ->dependsOn('type', function (
-                    Number $field,
+                    Number      $field,
                     NovaRequest $request,
-                    FormData $formData
+                    FormData    $formData
                 ) {
                     if ($formData->get('type')
                         === StockType::Price->value
@@ -117,7 +117,7 @@ class Stock extends Resource
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      *
      * @return array
      */
@@ -129,7 +129,7 @@ class Stock extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      *
      * @return array
      */
@@ -141,7 +141,7 @@ class Stock extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      *
      * @return array
      */
@@ -153,7 +153,7 @@ class Stock extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      *
      * @return array
      */
