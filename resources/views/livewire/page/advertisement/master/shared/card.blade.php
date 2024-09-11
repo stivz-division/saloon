@@ -86,10 +86,10 @@
                 @foreach($advertisement->images() as $image)
                     <div class="col p-1">
                         <img
-                                class="img-fluid"
-                                style="width: 150px; height: 150px; object-fit: cover; border-radius: 25px"
-                                src="{{ $image->getFullUrl() }}"
-                                alt="SERVICE IMAGE"
+                            class="img-fluid"
+                            style="width: 150px; height: 150px; object-fit: cover; border-radius: 25px"
+                            src="{{ $image->getFullUrl() }}"
+                            alt="SERVICE IMAGE"
                         >
                     </div>
                 @endforeach
@@ -102,19 +102,19 @@
         <div class="card-footer text-end row g-2">
             <div class="col">
                 <a
-                        href="{{ route('master.advertisement.edit', [
+                    href="{{ route('master.advertisement.edit', [
                         'masterAdvertisement' => $advertisement->id
                     ]) }}"
-                        class="btn btn-primary w-100"
+                    class="btn btn-primary w-100"
                 >
                     Редактировать
                 </a>
             </div>
             <div class="col">
                 <button
-                        wire:click.prevent="deleteAdvertisement({{ $advertisement->id }})"
-                        wire:confirm="Вы уверены, что хотите удалить услугу?"
-                        class="btn btn-danger w-100"
+                    wire:click.prevent="deleteAdvertisement({{ $advertisement->id }})"
+                    wire:confirm="Вы уверены, что хотите удалить услугу?"
+                    class="btn btn-danger w-100"
                 >
                     Удалить
                 </button>
@@ -123,9 +123,9 @@
             @if($advertisement->is_published)
                 <div class="col">
                     <button
-                            wire:click.prevent="archiveAdvertisement({{ $advertisement->id }})"
-                            wire:confirm="Вы уверены, что хотите отправить услугу в архив?"
-                            class="btn btn-dark w-100"
+                        wire:click.prevent="archiveAdvertisement({{ $advertisement->id }})"
+                        {{--                            wire:confirm="Вы уверены, что хотите отправить услугу в архив?"--}}
+                        class="btn btn-dark w-100"
                     >
                         В архив
                     </button>
@@ -133,9 +133,9 @@
             @else
                 <div class="col">
                     <button
-                            wire:click.prevent="publishAdvertisement({{ $advertisement->id }})"
-                            wire:confirm="Вы уверены, что хотите опубликовать услугу?"
-                            class="btn btn-dark w-100"
+                        wire:click.prevent="publishAdvertisement({{ $advertisement->id }})"
+                        {{--                        wire:confirm="Вы уверены, что хотите опубликовать услугу?"--}}
+                        class="btn btn-dark w-100"
                     >
                         Опубликовать
                     </button>
@@ -145,10 +145,10 @@
             @if($advertisement->advertisementTopTariff === null)
                 <div class="col">
                     <a
-                            href="{{ route('master.advertisement.top', [
+                        href="{{ route('master.advertisement.top', [
                         'masterAdvertisement' => $advertisement->id
                     ]) }}"
-                            class="btn btn-warning w-100"
+                        class="btn btn-warning w-100"
                     >
                         Поднять в ТОП
                     </a>

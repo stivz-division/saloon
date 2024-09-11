@@ -4,8 +4,8 @@
 
 <div class="p-3 rounded-4 bg-light mt-1 mb-1">
     <h4
-            class="mb-0"
-            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+        class="mb-0"
+        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
     >
         {{ $advertisement->description }}
     </h4>
@@ -62,9 +62,9 @@
         @if($advertisement->is_published)
             <div class="col">
                 <button
-                        wire:click.prevent="archiveAdvertisement({{ $advertisement->id }})"
-                        wire:confirm="Вы уверены, что хотите отправить услугу в архив?"
-                        class="btn btn-dark w-100"
+                    wire:click.prevent="archiveAdvertisement({{ $advertisement->id }})"
+                    {{--                        wire:confirm="Вы уверены, что хотите отправить услугу в архив?"--}}
+                    class="btn btn-dark w-100"
                 >
                     В архив
                 </button>
@@ -72,9 +72,9 @@
         @else
             <div class="col">
                 <button
-                        wire:click.prevent="publishAdvertisement({{ $advertisement->id }})"
-                        wire:confirm="Вы уверены, что хотите опубликовать услугу?"
-                        class="btn btn-dark w-100"
+                    wire:click.prevent="publishAdvertisement({{ $advertisement->id }})"
+                    {{--                    wire:confirm="Вы уверены, что хотите опубликовать услугу?"--}}
+                    class="btn btn-dark w-100"
                 >
                     Опубликовать
                 </button>
@@ -83,8 +83,8 @@
 
         <div class="col">
             <a
-                    href="{{ route('client.advertisement.create', ['link' => $advertisement->id]) }}"
-                    class="btn btn-primary w-100"
+                href="{{ route('client.advertisement.create', ['link' => $advertisement->id]) }}"
+                class="btn btn-primary w-100"
             >
                 Создать на основе
             </a>
