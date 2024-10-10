@@ -17,7 +17,7 @@ class ExamplesWorks extends Component
 
     public User $user;
 
-    #[Validate('required|file|max:5048')]
+    #[Validate('required|file|mimes:jpeg,png,mp4,mov,avi|mimetypes:image/jpeg,image/png,video/mp4,video/quicktime,video/x-msvideo|max:5048')]
     public $file;
 
     public $mediaItems;
