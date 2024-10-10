@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 class SubscriptionSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      * Подписки для Мастера
@@ -58,7 +57,7 @@ class SubscriptionSeeder extends Seeder
         // 10-20 объявлений
         Subscription::query()->create([
             'name' => '10 объявлений на 30 дней',
-            'advertisement_count' => 1,
+            'advertisement_count' => 10,
             'published_days' => 30,
             'price' => 500,
             'status' => true,
@@ -66,7 +65,7 @@ class SubscriptionSeeder extends Seeder
 
         Subscription::query()->create([
             'name' => '10 объявлений на 90 дней',
-            'advertisement_count' => 1,
+            'advertisement_count' => 10,
             'published_days' => 90,
             'price' => 1200,
             'status' => true,
@@ -74,7 +73,7 @@ class SubscriptionSeeder extends Seeder
 
         Subscription::query()->create([
             'name' => '10 объявлений на пол года',
-            'advertisement_count' => 1,
+            'advertisement_count' => 10,
             'published_days' => 182,
             'price' => 2200,
             'status' => true,
@@ -82,7 +81,7 @@ class SubscriptionSeeder extends Seeder
 
         Subscription::query()->create([
             'name' => '20 объявлений на год',
-            'advertisement_count' => 1,
+            'advertisement_count' => 20,
             'published_days' => 365,
             'price' => 4000,
             'status' => true,
@@ -91,7 +90,7 @@ class SubscriptionSeeder extends Seeder
         // 100 объявлений
         Subscription::query()->create([
             'name' => '100 объявлений на 30 дней',
-            'advertisement_count' => 1,
+            'advertisement_count' => 100,
             'published_days' => 30,
             'price' => 3000,
             'status' => true,
@@ -99,7 +98,7 @@ class SubscriptionSeeder extends Seeder
 
         Subscription::query()->create([
             'name' => '100 объявлений на 90 дней',
-            'advertisement_count' => 1,
+            'advertisement_count' => 100,
             'published_days' => 90,
             'price' => 8000,
             'status' => true,
@@ -107,7 +106,7 @@ class SubscriptionSeeder extends Seeder
 
         Subscription::query()->create([
             'name' => '100 объявлений на пол года',
-            'advertisement_count' => 1,
+            'advertisement_count' => 100,
             'published_days' => 182,
             'price' => 15000,
             'status' => true,
@@ -115,7 +114,7 @@ class SubscriptionSeeder extends Seeder
 
         Subscription::query()->create([
             'name' => '100 объявлений на год',
-            'advertisement_count' => 1,
+            'advertisement_count' => 100,
             'published_days' => 365,
             'price' => 25000,
             'status' => true,
