@@ -43,16 +43,16 @@
             </div>
             <div class="mb-3">
                 <label
-                        for="file"
+                        for="file_pet"
                         class="form-label"
                 >Вы можете загрузить фото или видео</label>
                 <input
-                        wire:model="file"
+                        wire:model="file_pet"
                         class="form-control"
                         accept="image/*"
-                        name="file"
+                        name="file_pet"
                         type="file"
-                        id="file"
+                        id="file_pet"
                 >
             </div>
             <div class="mb-3">

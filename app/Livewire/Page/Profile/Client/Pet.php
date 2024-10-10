@@ -24,7 +24,7 @@ class Pet extends Component
 
     public $animal;
 
-    public $file;
+    public $file_pet;
 
     public $pet_weight;
 
@@ -44,7 +44,7 @@ class Pet extends Component
             'animal'         => ['required', 'exists:animals,id'],
             'breeds'         => 'nullable|array|min:0|max:1',
             'breeds.*.value' => 'exists:breeds,id',
-            'file'           => [
+            'file_pet'       => [
                 'nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:15048',
             ],
             'pet_weight'     => ['required', 'exists:pet_weights,id'],
@@ -62,7 +62,7 @@ class Pet extends Component
 
         $animal = $animalRepository->getById($this->animal);
 
-        $file = $this->file;
+        $file = $this->file_pet;
 
         $petService->store(
             $this->user,
@@ -79,7 +79,7 @@ class Pet extends Component
         $this->nickname   = null;
         $this->animal     = null;
         $this->breeds     = [];
-        $this->file       = null;
+        $this->file_pet   = null;
         $this->pet_weight = null;
 
         $this->user->refresh();
