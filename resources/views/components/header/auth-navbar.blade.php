@@ -51,6 +51,10 @@
                         <x-header.item route="profile">Профиль</x-header.item>
                     </li>
 
+                    <li class="nav-item">
+                        <x-header.item route="tariff">Тарифы</x-header.item>
+                    </li>
+
                 </ul>
                 <form
                         method="post"

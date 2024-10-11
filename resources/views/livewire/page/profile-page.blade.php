@@ -39,7 +39,10 @@
     @endif
 
     @if($user->isClient())
-        <livewire:page.profile.client.pet :user="$user"/>
+        <livewire:page.profile.client.pet
+                wire:key="{{ uniqid('', true) }}"
+                :user="$user"
+        />
     @endif
 
 </div>
