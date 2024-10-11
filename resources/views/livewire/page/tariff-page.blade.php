@@ -47,11 +47,18 @@
         @endforeach
         </tbody>
     </table>
-    <div class="bg-dark text-white py-1 mt-auto">
-        <div class="container text-center text-nowrap">
-            <p class="mb-0">ИНН: 781129398703 | Вилков Сергей Андреевич | Email: 9219201792@mail.ru | Тел.: +7 921
-                9201792 |
-                Адрес: 194017, г.Санкт-Петербург, ул.Калязинская 7-30</p>
-        </div>
+    <div class="container text-center text-nowrap">
+        <p class="mb-0"> ИНН: 781129398703 | Вилков Сергей Андреевич | Р/сч 40817810055178663936 | БИК 044030653 </p>
+        <p> СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК | К/сч 30101810500000000653 </p>
+        <p> Email: 9219201792@mail.ru | Тел.: +7 921 920-17-92 </p>
+        <p> Для переводов в валюте: </p>
+        <p class="mb-0"> Beneficiary name: VILKOV SERGEI ANDREEVICH </p>
+        <p class="mb-0"> Beneficiary account: 40817810055178663936 </p>
+        <p class="mb-0"> Beneficiary bank: Sberbank, Moscow, Russian Federation </p>
+        <p class="mb-0"> SWIFT-код: SABRRUMM </p>
+        <p class="mb-0"> Correspondent Bank (EUR): Deutsche Bank AG, Frankfurt am Main </p>
+        <p class="mb-0"> Correspondent SWIFT (EUR): DEUTDEFF </p>
+        <p class="mb-0"> Correspondent Bank (USD): The Bank of New York Mellon, New York </p>
+        <p class="mb-0"> Correspondent SWIFT (USD): IRVTUS3N </p>
     </div>
 </div>
