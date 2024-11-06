@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('name')
                 ->comment('Название');
 
-            $table->unsignedInteger('views_count')
+            $table->unsignedInteger('views_count')->nullable()
                 ->comment('Количество объявлений просмотра');
 
             $table->unsignedInteger('viewing_days')
