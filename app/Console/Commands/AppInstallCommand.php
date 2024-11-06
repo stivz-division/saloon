@@ -46,6 +46,7 @@ class AppInstallCommand extends Command
             'db:seed --class=TestSeeder',
             'db:seed --class=SubscriptionSeeder',
             'db:seed --class=TopTariffsSeeder',
+            'db:seed --class=ViewSubscriptionSeeder',
         ];
 
     /**
