@@ -11,6 +11,11 @@
                     style="max-height: 40px;"
                     alt="LOGO"
                 >
+            </a>
+            <a
+                class="navbar-brand"
+                href="{{ route('profile') }}"
+            >
                 <span class="badge text-bg-primary">
                     {{ auth()->user()->account_type->name() }}
                 </span>
@@ -31,9 +36,9 @@
                 id="navbarSupportedContent"
             >
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <x-header.item route="welcome">Главная</x-header.item>
-                    </li>
+                    {{--                    <li class="nav-item">--}}
+                    {{--                        <x-header.item route="welcome">Главная</x-header.item>--}}
+                    {{--                    </li>--}}
 
                     <li class="nav-item">
                         <x-header.item route="client.advertisement.list">Объявления</x-header.item>
@@ -47,9 +52,9 @@
                         <x-header.item route="workers">Мастера и Салоны</x-header.item>
                     </li>
 
-                    <li class="nav-item">
-                        <x-header.item route="profile">Профиль</x-header.item>
-                    </li>
+                    {{--                    <li class="nav-item">--}}
+                    {{--                        <x-header.item route="profile">Профиль</x-header.item>--}}
+                    {{--                    </li>--}}
 
                     {{--                    <li class="nav-item">--}}
                     {{--                        <x-header.item route="tariff">Тарифы</x-header.item>--}}
