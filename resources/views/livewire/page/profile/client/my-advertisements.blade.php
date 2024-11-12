@@ -1,17 +1,17 @@
 <div class="p-3 rounded-4 bg-light">
     <div class="d-flex align-items-center justify-content-start mb-2">
-        <h2 class="me-2">Мои заявки</h2>
+        <h2 class="me-2">Мои объявления</h2>
         @if($mode === $this::PUBLISHED_MODE)
             <button
-                    class="btn btn-dark"
-                    wire:click="changeMode('{{$this::ARCHIVED_MODE}}')"
+                class="btn btn-dark"
+                wire:click="changeMode('{{$this::ARCHIVED_MODE}}')"
             >
                 Посмотреть архив ({{ $this->countArchived() }})
             </button>
         @elseif($mode === $this::ARCHIVED_MODE)
             <button
-                    class="btn btn-primary"
-                    wire:click="changeMode('{{$this::PUBLISHED_MODE}}')"
+                class="btn btn-primary"
+                wire:click="changeMode('{{$this::PUBLISHED_MODE}}')"
             >
                 Посмотреть опубликованные ({{ $this->countPublished() }})
             </button>

@@ -1,5 +1,5 @@
 <div>
-    <h1>Заявки</h1>
+    <h1>Объявления</h1>
 
     <div class="p-3 rounded-4 bg-light mb-3">
         <h2>Фильтрация</h2>

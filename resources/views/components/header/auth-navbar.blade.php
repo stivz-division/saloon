@@ -36,7 +36,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <x-header.item route="client.advertisement.list">Заявки</x-header.item>
+                        <x-header.item route="client.advertisement.list">Объявления</x-header.item>
                     </li>
 
                     <li class="nav-item">
