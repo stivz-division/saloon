@@ -28,12 +28,28 @@ final class ViewSubscriptionService
 
         if ($viewSubscription->views_count === null) {
             if ($info->subscription_end_at->isPast()) {
+                $info->update([
+                    'view_subscription_id' => null,
+                    'is_subscription'      => false,
+                    'subscription_at'      => null,
+                    'subscription_end_at'  => null,
+                    'subscription_views'   => null,
+                ]);
+
                 return;
             }
         }
 
         if ($viewSubscription->views_count !== null) {
             if ($info->subscription_views <= 0) {
+                $info->update([
+                    'view_subscription_id' => null,
+                    'is_subscription'      => false,
+                    'subscription_at'      => null,
+                    'subscription_end_at'  => null,
+                    'subscription_views'   => null,
+                ]);
+
                 return;
             }
 
