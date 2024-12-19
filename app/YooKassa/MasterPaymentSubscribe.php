@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\YooKassa;
 
 use App\Repositories\UserRepository;
+use App\Repositories\VIewSubscriptionRepository;
 use App\Services\MasterSubscribeHistoryService;
 use App\Services\UserService;
 
@@ -22,6 +23,14 @@ final class MasterPaymentSubscribe extends BaseYooKassaHandler
             MasterSubscribeHistoryService::class
         );
 
+        $viewSubscribe = app(VIewSubscriptionRepository::class)->getById(
+            (int) $this->payment->metadata->view_subscribe_id
+        );
+
+        if ($viewSubscribe === null) {
+            return;
+        }
+
         $master = $userRepository->getById(
             (int) $this->payment->metadata->master_id
         );
@@ -32,11 +41,12 @@ final class MasterPaymentSubscribe extends BaseYooKassaHandler
 
         $userService->masterPaymentSubscribe(
             $master,
+            $viewSubscribe
         );
 
         $masterSubscribeHistoryService->store(
             $master,
-            (float) config('yookassa.master-subscription')
+            (float) $viewSubscribe->price
         );
     }
 

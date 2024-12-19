@@ -4,7 +4,9 @@ namespace App\Livewire\Page\MasterPayment;
 
 use App\Domain\Enum\PromocodeType;
 use App\Domain\Enum\YooKassaPaymentType;
+use App\Repositories\VIewSubscriptionRepository;
 use App\Services\UserService;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use YooKassa\Client;
 use YooKassa\Model\CurrencyCode;
@@ -34,12 +36,24 @@ class SubscriptionPage extends Component
         $userService->masterPaymentSubscribe(
             auth()->user(),
         );
-        
+
         $this->redirectRoute('welcome');
     }
 
-    public function paymentAdvertisement()
+    #[Computed]
+    public function tariffs()
     {
+        return app(VIewSubscriptionRepository::class)->tarrifs();
+    }
+
+    public function paymentAdvertisement($tariff)
+    {
+        $tariff = app(VIewSubscriptionRepository::class)->getById($tariff);
+
+        if ($tariff === null) {
+            return;
+        }
+
         $client = app(Client::class);
 
         $idempotenceKey = uniqid('', true);
@@ -47,7 +61,7 @@ class SubscriptionPage extends Component
         $response = $client->createPayment(
             [
                 'amount'       => [
-                    'value'    => config('yookassa.master-subscription'),
+                    'value'    => $tariff->price,
                     'currency' => CurrencyCode::RUB,
                 ],
                 'confirmation' => [
@@ -56,10 +70,11 @@ class SubscriptionPage extends Component
                     'return_url' => route('welcome'),
                 ],
                 'capture'      => true,
-                'description'  => 'Оплата мастером подписки',
+                'description'  => 'Оплата мастером подписки на просмотр',
                 'metadata'     => [
-                    'type'      => YooKassaPaymentType::MasterSubscription->value,
-                    'master_id' => auth()->id(),
+                    'type'              => YooKassaPaymentType::MasterSubscription->value,
+                    'view_subscribe_id' => $tariff->id,
+                    'master_id'         => auth()->id(),
                 ],
             ],
             $idempotenceKey

@@ -95,8 +95,10 @@ final class ClientAdvertisementService
         }
 
         if ($user->isMaster()) {
-            return $user->isActiveSubscription()
-                || $advertisement->itMasterPayment($user->id);
+            //            return $user->isActiveSubscription()
+            //                || $advertisement->itMasterPayment($user->id);
+            //
+            return $advertisement->itMasterPayment($user->id);
         }
 
         if ($advertisement === null) {

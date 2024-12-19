@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -15,6 +16,8 @@ class InfoMaster extends Model implements HasMedia
 
     protected $fillable
         = [
+            'view_subscription_id',
+            'subscription_views',
             'is_veterinarian',
             'is_delivering_pet',
             'is_home_check_out',
@@ -43,6 +46,11 @@ class InfoMaster extends Model implements HasMedia
             || $this->is_delivering_pet
             || $this->is_home_check_out
             || $this->is_at_home;
+    }
+
+    public function viewSubscription(): BelongsTo
+    {
+        return $this->belongsTo(ViewSubscription::class);
     }
 
 }

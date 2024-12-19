@@ -6,6 +6,7 @@ use App\Domain\Enum\PromocodeType;
 use App\Domain\Enum\YooKassaPaymentType;
 use App\Repositories\ClientAdvertisementRepository;
 use App\Services\MasterClientAdvertisementService;
+use App\Services\ViewSubscriptionService;
 use Livewire\Component;
 use YooKassa\Client;
 use YooKassa\Model\CurrencyCode;
@@ -43,6 +44,12 @@ class ClientAdvertisementPage extends Component
         if ($advertisement === null) {
             abort(404);
         }
+
+        app(ViewSubscriptionService::class)
+            ->handlerClientAdvertisement(
+                auth()->user(),
+                $advertisement
+            );
 
         if ($advertisement->itMasterPayment(
             auth()->user()->id
