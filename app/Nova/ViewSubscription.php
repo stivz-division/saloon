@@ -37,7 +37,7 @@ class ViewSubscription extends Resource
 
     public static function label(): string
     {
-        return 'Подписки';
+        return 'Подписки на просмотр';
     }
 
     public static function singularLabel(): string
