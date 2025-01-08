@@ -1,7 +1,7 @@
 <div>
     <div class="p-3 rounded-4 bg-light mb-3">
         <h1>Подписка</h1>
-        <p class="fs-4">Что даст подписка.</p>
+        <p class="fs-4">Что даст подписка:</p>
         <ul>
             <li>Просмотр объявлений</li>
         </ul>
